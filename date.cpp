@@ -16,4 +16,12 @@ namespace lab2 {
 	Date::Date(int year, int month, int day) : y{year}, m{month}, d{day} {
 		// Do nothing
 	}
+	
+	Date::~Date() {
+		// Do nothing
+	}
+	
+	Date::Date() {
+		
+	}
 }
