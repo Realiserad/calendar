@@ -21,6 +21,7 @@ namespace lab2
 	 * @author Sai Man Wong
 	 */ 
 	class Date {
+		protected:
 		int y, m, d;
 		CalendarFormat f;
 		public:
@@ -34,18 +35,13 @@ namespace lab2
 		Date(int year, int month, int day);
 		/* Copy-construct from another Date instance. Performs a
 		 * conversation between Julian and Gregorian if required. */
-		Date(Date &date);
+		//Date(Date &date);
 		/* Default destructor. IMPORTANT! The destructor should be
 		 * declared virtual to prevent resource leaks. */
 		virtual ~Date();
 		/* Copy-assign from another Date instance. Performs a
 		 * conversation between Julian and Gregorian if required. */
-		Date& operator=(Date &date);
-		/* Returns a CalendarFormat specifying the type of calendar
-		 * format used by this class. The value returned by this method
-		 * can be used to determine if a conversation is needed, e.g in
-		 * the copy-assign constructor (depending on your implementation). */
-		virtual CalendarFormat format() const;
+		//Date& operator=(Date &date);
 		/* Returns the year of this date. */
 		virtual int year() const;
 		/* Returns the month of this date. */
@@ -53,7 +49,7 @@ namespace lab2
 		/* Returns the day of this date. */
 		virtual int day() const;
 		/* Returns the number associated with the current weekday. */
-		virtual int week_day() const = 0;
+		//virtual int week_day() const = 0;
 	};
 }
 #endif
