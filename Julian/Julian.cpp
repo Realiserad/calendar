@@ -1,10 +1,14 @@
 #include <ctime>
 #include <iostream>
-#include "Gregorian.hpp"
+#include "../Julian/Julian.hpp"
 #include "../Date/Date.hpp"
 
 namespace lab2 {
 	Julian::Julian() : Date() {
-		// What to do here?
+
 	}
+
+    int Julian::year() const { return mYear; }
+    unsigned Julian::month() const { return mMonth; }
+    unsigned Julian::day() const { return mDay; }
 }

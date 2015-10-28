@@ -33,9 +33,9 @@ namespace lab2 {
 		/* Returns the year of this date. */
 		virtual int year() const;
 		/* Returns the month of this date. */
-		virtual unsigned int month();
+		virtual unsigned int month() const;
 		/* Returns the day of this date. */
-		virtual unsigned int day();
+		virtual unsigned int day() const;
 		/* Returns the number associated with the current weekday. */
 		virtual unsigned int week_day();
 		/* Returns the number of days in a week. */

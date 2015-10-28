@@ -13,4 +13,11 @@ namespace lab2 {
 		mMonth = now->tm_mon + 1;   
 		mDay = now->tm_mday;
 	}
+    Gregorian::Gregorian(Julian& j) {
+       convert(mYear, mMonth, mDay, false); 
+    }
+
+    int Gregorian::year() const { return mYear; }
+    unsigned Gregorian::month() const { return mMonth; }
+    unsigned Gregorian::day() const { return mDay; }
 }
