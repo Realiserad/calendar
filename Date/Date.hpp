@@ -1,5 +1,6 @@
 #ifndef __DATE
 #define __DATE
+#include <string>
 namespace lab2 {	
 	/**
 	 * Abstract class for a Date which specifies required
@@ -9,7 +10,7 @@ namespace lab2 {
 	 * Follows the specification: http://goo.gl/ogFLZQ
 	 * @author Bastian Fredriksson
 	 * @author Sai Man Wong
-	 */ 
+	 */
 	class Date {
 		protected:
 		int mYear, mMonth, mDay;
@@ -27,11 +28,27 @@ namespace lab2 {
 		/* Returns the year of this date. */
 		virtual int year() const;
 		/* Returns the month of this date. */
-		virtual int month() const;
+		virtual unsigned int month() const;
 		/* Returns the day of this date. */
-		virtual int day() const;
+		virtual unsigned int day() const;
 		/* Returns the number associated with the current weekday. */
-		virtual int week_day() const;
+		virtual unsigned int week_day() const;
+		/* Returns the number of days in a week. */
+		virtual unsigned int days_per_week();
+		/* Returns the number of days in the current month. */
+		virtual unsigned int days_this_month();
+		/* Returns the name of the current weekday. */
+		virtual std::string week_day_name();
+		/* Returns name of current month. */
+		virtual std::string month_name();
+		/* Increments the current year by the number specified. */
+		template <typename T> 
+		T add_year(int);
+		/* Increments the current year by the number specified. */
+		template <typename T> 
+		T add_month(int);
+		/* This function shall return the MJD representation of the current day. */
+		int mod_julian_day();
 	};
 }
 #endif
