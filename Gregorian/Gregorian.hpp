@@ -4,7 +4,7 @@
 #include "../Julian/Julian.hpp"
 
 namespace lab2 {
-	class Gregorian : Date {
+	class Gregorian : public Date {
         public:
 		/* Default constructor. Should construct a 
 		 * Gregorian calendar from the current date. */

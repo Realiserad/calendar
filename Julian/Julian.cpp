@@ -4,11 +4,15 @@
 #include "../Date/Date.hpp"
 
 namespace lab2 {
-	Julian::Julian() : Date() {
-
+    int Julian::year() const { 
+		return mYear; 
 	}
-
-    int Julian::year() const { return mYear; }
-    unsigned Julian::month() const { return mMonth; }
-    unsigned Julian::day() const { return mDay; }
+    
+    unsigned Julian::month() const { 
+		return mMonth; 
+	}
+	
+    unsigned Julian::day() const { 
+		return mDay; 
+	}
 }

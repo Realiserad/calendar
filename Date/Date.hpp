@@ -1,6 +1,7 @@
 #ifndef __DATE
 #define __DATE
 #include <string>
+#include <iostream>
 namespace lab2 {	
 	/**
 	 * Abstract class for a Date which specifies required
@@ -54,6 +55,11 @@ namespace lab2 {
 		T add_month(int);
 		/* This function shall return the MJD representation of the current day. */
 		int mod_julian_day();
+		
+		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
+			os << date.year() << "-" << date.month() << "-" << date.day();
+			return os;
+		}
 	};
 }
 #endif

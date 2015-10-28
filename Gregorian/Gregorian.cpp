@@ -13,7 +13,10 @@ namespace lab2 {
 		mMonth = now->tm_mon + 1;   
 		mDay = now->tm_mday;
 	}
-    Gregorian::Gregorian(Julian& j) {
+    Gregorian::Gregorian(const Julian& j) {
+		mYear = j.year();
+		mMonth = j.month();
+		mDay = j.day();
        convert(mYear, mMonth, mDay, false); 
     }
 

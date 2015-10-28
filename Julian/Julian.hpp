@@ -3,7 +3,8 @@
 #include "../Date/Date.hpp"
 
 namespace lab2 {
-	class Julian : Date {
+	class Julian : public Date {
+		public:
 		/* Default constructor. Should construct a 
 		 * Julian calendar from the current date. */
 		Julian();

@@ -11,3 +11,6 @@ clean :
 	@echo "Crap destroyed successfully!"
 all : 
 	@echo "No rule defined yet."
+test :
+	$(CC) $(FLAGS) test.cpp -o test.out
+	./test.out
