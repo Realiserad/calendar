@@ -28,11 +28,11 @@ namespace lab2 {
 		/* Returns the year of this date. */
 		virtual int year() const;
 		/* Returns the month of this date. */
-		virtual unsigned int month() const;
+		virtual unsigned int month();
 		/* Returns the day of this date. */
-		virtual unsigned int day() const;
+		virtual unsigned int day();
 		/* Returns the number associated with the current weekday. */
-		virtual unsigned int week_day() const;
+		virtual unsigned int week_day();
 		/* Returns the number of days in a week. */
 		virtual unsigned int days_per_week();
 		/* Returns the number of days in the current month. */
