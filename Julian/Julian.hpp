@@ -8,5 +8,9 @@ namespace lab2 {
 		 * Julian calendar from the current date. */
 		Julian();
 	};
+	virtual unsigned int month() override {
+		int mj; // month in Julian
+		return mj;
+	}
 }
 #endif

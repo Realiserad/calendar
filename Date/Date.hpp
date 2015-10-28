@@ -7,13 +7,18 @@ namespace lab2 {
 	 * functionality of derived classes "Gregorian" and
 	 * "Julian". Read the method comments for detailed
 	 * instructions of how each method should behave.
-	 * Follows the specification: http://goo.gl/ogFLZQ
+	 * Follows the specification: 
+	 * http://www.tondering.dk/claus/cal/julperiod.php
 	 * @author Bastian Fredriksson
 	 * @author Sai Man Wong
 	 */
 	class Date {
 		protected:
 		int mYear, mMonth, mDay;
+		/* Convert the current date (mYear, mMonth, mDay) into
+		 * either a Julian or Gregorian date (year, month day) 
+		 * depending on the flag given as forth parameter. */
+		void convert(int&, int&, int&, bool);
 		public:
 		/* Construct a date from the triple (year, month, day)
 		 * specified in the date format used by the class. Throws 

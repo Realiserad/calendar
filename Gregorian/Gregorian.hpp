@@ -8,5 +8,8 @@ namespace lab2 {
 		 * Gregorian calendar from the current date. */
 		Gregorian();
 	};
+	virtual unsigned int month() override {
+		return mMonth;
+	}
 }
 #endif
