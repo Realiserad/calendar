@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Date/Date.hpp"
-#include "Gregorian/Gregorian.hpp"
-#include "Julian/Julian.hpp"
+#include "Date/Date.cpp"
+#include "Gregorian/Gregorian.cpp"
+#include "Julian/Julian.cpp"
 #include <assert.h>
 
 int main() {

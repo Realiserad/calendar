@@ -34,7 +34,45 @@ namespace lab2 {
 			}
 	}
 	
-	~Date() {}
+	int Date::year() const { return mYear; }
+    unsigned int Date::month() const { return mMonth; }
+    unsigned int Date::day() const { return mDay; }
+	
+	unsigned int Date::week_day() {
+		return 0;
+	}
+	
+	unsigned int Date::days_per_week() {
+		return 7;
+	}
+	
+	unsigned int Date::days_this_month() {
+		return 31;
+	}
+	
+	std::string Date::week_day_name() {
+		return "";
+	}
+	
+	std::string Date::month_name() {
+		return "";
+	}
+	
+	template <typename T>
+	T Date::add_year(int y) {
+		return this;
+	}
+	
+	template <typename T>
+	T Date::add_month(int m) {
+		return this;
+	}
+	
+	int Date::mod_julian_day() {
+		return 1337;
+	}
+	
+	Date::~Date() {}
 	
 	/// Convert the date stored in this object to Julian.
 	void Date::convert_to_julian() {

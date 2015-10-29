@@ -9,11 +9,7 @@ namespace lab2 {
 		/* Default constructor. Should construct a 
 		 * Gregorian calendar from the current date. */
             Gregorian();
-            Gregorian(Julian&);
-            // From date.hpp
-            virtual int year() const override;
-            virtual unsigned int month() const override;
-            virtual unsigned int day() const override;
+            Gregorian(const Julian&);
     };
 }
 #endif

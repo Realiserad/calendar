@@ -1,6 +1,7 @@
 #include <ctime>
 #include <iostream>
 #include "Gregorian.hpp"
+#include "../Julian/Julian.hpp"
 #include "../Date/Date.hpp"
 
 namespace lab2 {
@@ -17,10 +18,6 @@ namespace lab2 {
 		mYear = j.year();
 		mMonth = j.month();
 		mDay = j.day();
-       convert(mYear, mMonth, mDay, false); 
+       convert_to_gregorian();
     }
-
-    int Gregorian::year() const { return mYear; }
-    unsigned Gregorian::month() const { return mMonth; }
-    unsigned Gregorian::day() const { return mDay; }
 }
