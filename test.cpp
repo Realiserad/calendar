@@ -1,9 +1,10 @@
 #include <iostream>
+#include <assert.h>
 #include "Date/Date.cpp"
 #include "Gregorian/Gregorian.cpp"
 #include "Julian/Julian.cpp"
-#include <assert.h>
 
+/// test operator++(int)
 void test_increment() {
 	lab2::Gregorian g1(1999, 12, 31);
     g1++;
@@ -18,12 +19,21 @@ void test_increment() {
     assert(g3.day() == 1 && g3.month() == 3 && g3.year() == 1900);
 }
 
+/// test operator++, operator== and operator!=
 void test_feminism() {
 	lab2::Gregorian g(1900, 1, 1);
 	lab2::Julian j(1899, 12, 19);
-	assert((j == g) == false);
+	assert(j != g);
 	j++;
 	assert(j == g);
+}
+
+void test_pointers() {
+	lab2::Date * p1 = new lab2::Julian();
+	lab2::Date * p2 = new lab2::Gregorian();
+	assert(*p1 == *p2); 
+	delete p1;
+	delete p2;
 }
 
 void test_convert() {
@@ -37,17 +47,9 @@ void test_convert() {
     std::cout << "gjg (Gregorian -> Julian -> Gregorian): " << gjg << std::endl;
 }
 
-void test_convert_origin() {
-	/*lab2::Gregorian g(1858, 11, 16);
-	lab2::Julian j(g);
-	std::cout << j << std::endl; //1858-11-4 
-	std::cout << g << std::endl; //1858-11-16*/
-}
 int main() {
-    //test_increment();
-    
+    test_increment();
     test_feminism();
-    
     test_convert();
-    test_convert_origin();
+    test_pointers();
 }

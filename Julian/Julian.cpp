@@ -9,10 +9,25 @@ namespace lab2 {
         // Error checking
     }
     
+    // Create a Julian calendar with the current date.
+    Julian::Julian() {
+		gregorian = false;
+		// Get UNIX timestamp in ms
+		time_t ms = time(0);
+		// Convert to Gregorian calendar format
+		struct tm *now = localtime(&ms);
+		mYear = now->tm_year + 1900;
+		mMonth = now->tm_mon + 1;   
+		mDay = now->tm_mday;
+		// Convert to Julian
+		convert_to_julian();
+	}
+    
     Julian::Julian(const Date &d) {
 		mDay = d.day();
 		mYear = d.year();
 		mMonth = d.month();
+		gregorian = false;
 		if (d.is_gregorian()) {
 			convert_to_julian();
 		}

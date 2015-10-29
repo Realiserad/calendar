@@ -7,6 +7,7 @@
 namespace lab2 {
 	Gregorian::Gregorian(int y, int m, int d) : Date(y,m,d, true) {}
 	Gregorian::Gregorian() : Date() {
+		gregorian = true;
 		// Get UNIX timestamp in ms
 		time_t ms = time(0);
 		// Convert to Gregorian calendar format
@@ -19,6 +20,7 @@ namespace lab2 {
 		mYear = d.year();
 		mMonth = d.month();
 		mDay = d.day();
+		gregorian = true;
 		if (!d.is_gregorian()) {
 			convert_to_gregorian();
 		}
@@ -35,7 +37,7 @@ namespace lab2 {
 				}
 			}
 		}
-		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+		else if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
 			if (mDay > 30) {
 				mDay = 1;
 				++mMonth;
@@ -45,8 +47,7 @@ namespace lab2 {
 				}
 			}
 		}
-		
-		if (mMonth == 2) {
+		else if (mMonth == 2) {
 			if (mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0)) {
 				// Leap year
 				if (mDay > 29) {
@@ -61,7 +62,6 @@ namespace lab2 {
 				}
 			}
 		}
-		std::cout << "New date: " << mYear << "-" << mMonth << "-" << mDay << std::endl;
 		return *this;
 	}
 }
