@@ -1,4 +1,4 @@
-CC = g++
+CC = clang++ 
 FLAGS = -std=c++11 -Wall -pedantic -g
 date :
 	$(CC) ./Date/Date.cpp $(FLAGS) -c

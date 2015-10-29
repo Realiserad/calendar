@@ -35,7 +35,7 @@ namespace lab2 {
 			}
 	}
 	
-	bool Date::is_gregorian() {
+	bool Date::is_gregorian() const {
 		return gregorian;
 	}
 	
@@ -102,37 +102,60 @@ namespace lab2 {
 		int y = mYear + 4800 - a;
 		int mm = mMonth + 12*a - 3;
 		
-		double JD, b, c;
+		double JD;
 		if (convert_to_julian) {
 			// For a date in the gregorian calendar
 			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
+            std::cout << "if - sats " << JD << std::endl;
 		} else {
 			// For a date in the Julian calendar
 			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
+            std::cout << "else - sats " << JD << std::endl;
 		}
 		
 		//////////////////////////////////////////////////////
 		//	Convert JD to (year, month, day) in the calendar 
 		//	format specified by convert_to_julian
 		//////////////////////////////////////////////////////
+        int f;
+        y = 4716;
+        int j = 1401;
+        int m = 2;
+        int n = 12;
+        int r = 4;
+        int p = 1461; 
+        int v = 3;
+        int u = 5;
+        int s = 153;
+        int w = 2; 
+        int B = 274277;
+        int C = -38;
 		if (convert_to_julian) {
 			// For the Julian calendar, calculate:
-			b = 0;
-			c = JD + 32082;
+            f = JD + j; 
+			// b = 0;
+			// c = JD + 32082;
 		} else {
+            f = JD + j + (((4*JD+B)/146097)*3)/4+C;
 			// For the Gregorian calendar, calculate:
-			double a = JD + 32044;
-			b = (4*a+3)/146097;
-			c = a - ((146097*b)/4);
+			// double a = JD + 32044;
+			// b = (4*a+3)/146097;
+			// c = a - ((146097*b)/4);
 		}
 		
+        int e = r*f+v;
+        int g = (e % p)/r;
+        int h = u*g+w;
+        mDay = (h % s)/u+1;
+        mMonth = ((h/s+m)%n)+1;
+        mYear = (e/p)-y+(n+m-mMonth)/n;
 		// Then for both calendars, calculate:
-		double d = (4*c+3)/1461;
-		double e = c - ((1461*d)/4);
-		double m = (5*e+2)/153;
-		
-		mDay = e - ((153*m + 2)/5) + 1;
-		mMonth = m + 3 - (12*(m/10));
-		mYear = (100*b) + d - 4800 + (m/10);
+		// double d = (4*c+3)/1461;
+		// double e = c - ((1461*d)/4);
+		// double m = (5*e+2)/153;
+		//
+		// mDay = e - ((153*m + 2)/5) + 1;
+		// mMonth = m + 3 - (12*(m/10));
+		// mYear = (100*b) + d - 4800 + (m/10);
 	}
 }

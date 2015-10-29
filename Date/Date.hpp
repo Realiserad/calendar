@@ -15,9 +15,8 @@ namespace lab2 {
 	 */
 	class Date {
 		protected:
-		bool gregorian;
 		int mYear, mMonth, mDay;
-		bool is_gregorian();
+		bool gregorian;
 		void convert(bool);
 		void convert_to_julian( void );
 		void convert_to_gregorian( void );
@@ -58,9 +57,11 @@ namespace lab2 {
 		int mod_julian_day();
 		
 		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
-			os << date.year() << "-"q << date.month() << "-" << date.day();
+			os << date.year() << "-" << date.month() << "-" << date.day();
 			return os;
 		}
+        
+		bool is_gregorian() const;
 	};
 }
 #endif

@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Vim
+.*.swp
+*.swp
+.*.*.swp
+
