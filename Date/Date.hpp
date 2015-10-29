@@ -58,7 +58,7 @@ namespace lab2 {
 		int mod_julian_day();
 		
 		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
-			os << date.year() << "-"q << date.month() << "-" << date.day();
+			os << date.year() << "-" << date.month() << "-" << date.day();
 			return os;
 		}
 	};
