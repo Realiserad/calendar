@@ -12,7 +12,6 @@ namespace lab2 {
         Gregorian();
         Gregorian(const Date&);
         Gregorian& operator++(int);
-        bool is_leap_year(int);
     };
 }
 #endif

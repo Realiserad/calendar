@@ -48,7 +48,7 @@ namespace lab2 {
 			}
 		}
 		else if (mMonth == 2) {
-			if (is_leap_year(mYear)) {
+			if (is_leap_year()) {
 				// Leap year
 				if (mDay > 29) {
 					++mMonth;
@@ -63,9 +63,5 @@ namespace lab2 {
 			}
 		}
 		return *this;
-	}
-	
-	bool Gregorian::is_leap_year(int year) {
-		return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
 	}
 }

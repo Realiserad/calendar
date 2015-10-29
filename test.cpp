@@ -66,13 +66,13 @@ void test_add_year() {
     assert(g == gTest);
 
     lab2::Gregorian g2(2004, 2, 29);
-    g.add_year(1); 
+    g2.add_year(1); 
     lab2::Gregorian g2Test(2005, 2, 28); 
     assert(g2 == g2Test);
 
     lab2::Gregorian g3(2004, 2, 29);
-    g.add_year(4); 
-    lab2::Gregorian g3Test(2004, 2, 28); 
+    g3.add_year(4); 
+    lab2::Gregorian g3Test(2008, 2, 29); 
     assert(g3 == g3Test);
 }
 

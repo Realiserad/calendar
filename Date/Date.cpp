@@ -65,7 +65,7 @@ namespace lab2 {
 			return "January";
 		}
 		if (mMonth == 2) {
-			return "February"
+			return "February";
 		}
 		if (mMonth == 3) {
 			return "March";
@@ -102,8 +102,7 @@ namespace lab2 {
 	
 	Date& Date::add_year(int n) {
 		mYear += n;
-		return *this;
-		if (mMonth == 2 && mDay == 29 && !is_leap_year(mYear)) {
+		if (mMonth == 2 && mDay == 29 && !is_leap_year()) {
 			mDay--;
 		}
 		return *this;
@@ -112,7 +111,7 @@ namespace lab2 {
 	Date& Date::add_month(int n) {
 		int years = n / 12;
 		int months = n - (years * 12);
-		add_years(years);
+		add_year(years);
 		mMonth += months;
 		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
 			if (mDay > 30) {
@@ -120,7 +119,7 @@ namespace lab2 {
 			}
 		}
 		if (mMonth == 2) {
-			if (is_leap_year(mYear)) {
+			if (is_leap_year()) {
 				if (mDay > 29) {
 					mDay = 29;
 				}
@@ -131,6 +130,13 @@ namespace lab2 {
 			}
 		}
 		return *this;
+	}
+	
+	bool Date::is_leap_year() {
+		if (gregorian) {
+			return mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0);
+		}
+		return mYear % 4 == 0;
 	}
 	
 	int Date::mod_julian_day() {

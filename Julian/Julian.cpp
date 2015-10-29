@@ -74,8 +74,4 @@ namespace lab2 {
 		
 		return *this;
 	}
-	
-	bool Julian::is_leap_year(int year) {
-		return year % 4 == 0;
-	}
 }
