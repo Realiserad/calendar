@@ -16,10 +16,9 @@ namespace lab2 {
 	class Date {
 		protected:
 		int mYear, mMonth, mDay;
-		/* Convert the current date (mYear, mMonth, mDay) into
-		 * either a Julian or Gregorian date (year, month day) 
-		 * depending on the flag given as forth parameter. */
-		void convert(int&, int&, int&, bool);
+		void convert(bool);
+		void convert_to_julian( void );
+		void convert_to_gregorian( void );
 		public:
 		/* Construct a date from the triple (year, month, day)
 		 * specified in the date format used by the class. Throws 

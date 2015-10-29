@@ -33,33 +33,61 @@ namespace lab2 {
 					throw std::invalid_argument("Invalid day");
 			}
 	}
-	void Date::convert(int &year, int &month, int &day, bool julian) {
+	
+	/// Convert the date stored in this object to Julian.
+	void Date::convert_to_julian() {
+		convert( true );
+	}
+	
+	void Date::convert_to_gregorian() {
+		convert( false );
+	}
+	
+	/// Convert the date stored in the current object from
+	/// Gregorian to Julian, or from Julian to Gregorian depending
+	/// on the flag given as argument.
+	/// @param convert_to_julian True iff convert from Gregorian to Julian
+	void Date::convert(bool convert_to_julian) {
 		// Ref: http://www.tondering.dk/claus/cal/julperiod.php
 		
-		// Calculate JD
+		//////////////////////////////////////////////////////
+		//	Convert the current date to Julian Day (JD)
+		//////////////////////////////////////////////////////
 		int a = (14 - mMonth) / 12;
 		int y = mYear + 4800 - a;
-		int mJD = mMonth + 12*a - 3;
+		int mm = mMonth + 12*a - 3;
 		
 		double JD, b, c;
-		if (julian) {
-			JD = mDay + ((153*mJD + 2) / 5) + (365*y) + (y/4) - 32083;
+		if (convert_to_julian) {
+			// For a date in the gregorian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
+		} else {
+			// For a date in the Julian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
+		}
+		
+		//////////////////////////////////////////////////////
+		//	Convert JD to (year, month, day) in the calendar 
+		//	format specified by convert_to_julian
+		//////////////////////////////////////////////////////
+		if (convert_to_julian) {
+			// For the Julian calendar, calculate:
 			b = 0;
 			c = JD + 32082;
-			
 		} else {
-			JD = mDay + ((153*mJD + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
+			// For the Gregorian calendar, calculate:
 			double a = JD + 32044;
 			b = (4*a+3)/146097;
 			c = a - ((146097*b)/4);
 		}
 		
+		// Then for both calendars, calculate:
 		double d = (4*c+3)/1461;
 		double e = c - ((1461*d)/4);
 		double m = (5*e+2)/153;
 		
-		day = e - ((153*m + 2)/5) + 1;
-		month = m + 3 - (12*(m/10));
-		year = (100*b) + d - 4800 + (m/10);
+		mDay = e - ((153*m + 2)/5) + 1;
+		mMmonth = m + 3 - (12*(m/10));
+		mYear = (100*b) + d - 4800 + (m/10);
 	}
 }
