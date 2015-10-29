@@ -93,7 +93,7 @@ namespace lab2 {
 	/// on the flag given as argument.
 	/// @param convert_to_julian True iff convert from Gregorian to Julian
 	void Date::convert(bool convert_to_julian) {
-		// Ref: http://www.tondering.dk/claus/cal/julperiod.php
+		// Ref: https://en.wikipedia.org/wiki/Julian_day#Calculation
 		
 		//////////////////////////////////////////////////////
 		//	Convert the current date to Julian Day (JD)
