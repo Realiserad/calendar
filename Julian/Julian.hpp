@@ -10,6 +10,7 @@ namespace lab2 {
 		 * Julian calendar from the current date. */
 		Julian(int, int, int);
 		Julian(const Date&);
+		Julian& operator++(int);
 	};
 }
 #endif

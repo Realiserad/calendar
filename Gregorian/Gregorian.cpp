@@ -23,4 +23,45 @@ namespace lab2 {
 			convert_to_gregorian();
 		}
     }
+    Gregorian& Gregorian::operator++(int) {
+		++mDay;
+		if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
+			if (mDay > 31) {
+				mDay = 1;
+				++mMonth;
+				if (mMonth > 12) {
+					mMonth = 1;
+					++mYear;
+				}
+			}
+		}
+		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+			if (mDay > 30) {
+				mDay = 1;
+				++mMonth;
+				if (mMonth > 12) {
+					mMonth = 1;
+					++mYear;
+				}
+			}
+		}
+		
+		if (mMonth == 2) {
+			if (mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0)) {
+				// Leap year
+				if (mDay > 29) {
+					++mMonth;
+					mDay = 1;
+				}
+			} else {
+				// Not a leap year
+				if (mDay > 28) {
+					++mMonth;
+					mDay = 1;
+				}
+			}
+		}
+		std::cout << "New date: " << mYear << "-" << mMonth << "-" << mDay << std::endl;
+		return *this;
+	}
 }

@@ -11,6 +11,7 @@ namespace lab2 {
 		 * Gregorian calendar from the current date. */
         Gregorian();
         Gregorian(const Date&);
+        Gregorian& operator++(int);
     };
 }
 #endif
