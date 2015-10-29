@@ -87,7 +87,7 @@ namespace lab2 {
 		double m = (5*e+2)/153;
 		
 		mDay = e - ((153*m + 2)/5) + 1;
-		mMmonth = m + 3 - (12*(m/10));
+		mMonth = m + 3 - (12*(m/10));
 		mYear = (100*b) + d - 4800 + (m/10);
 	}
 }

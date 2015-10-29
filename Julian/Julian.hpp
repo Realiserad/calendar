@@ -7,7 +7,7 @@ namespace lab2 {
 		public:
 		/* Default constructor. Should construct a 
 		 * Julian calendar from the current date. */
-		Julian();
+		Julian(int, int, int);
         virtual int year() const override;
         virtual unsigned int month() const override;
 		virtual unsigned int day() const override;
