@@ -15,7 +15,9 @@ namespace lab2 {
 	 */
 	class Date {
 		protected:
+		bool gregorian;
 		int mYear, mMonth, mDay;
+		bool is_gregorian();
 		void convert(bool);
 		void convert_to_julian( void );
 		void convert_to_gregorian( void );
@@ -25,7 +27,7 @@ namespace lab2 {
 		 * std::invalid_argument if an invalid date is given. In
 		 * particular, the date must be in the range 1858-01-01
 		 * to 2558-12-31. */
-		Date(int year, int month, int day);
+		Date(int year, int month, int day, bool gregorian);
 		/* Important to define the destructor as virtual! */
 		virtual ~Date();
 		/* Default constructor. */
@@ -56,7 +58,7 @@ namespace lab2 {
 		int mod_julian_day();
 		
 		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
-			os << date.year() << "-" << date.month() << "-" << date.day();
+			os << date.year() << "-"q << date.month() << "-" << date.day();
 			return os;
 		}
 	};

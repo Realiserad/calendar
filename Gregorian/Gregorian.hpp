@@ -6,10 +6,11 @@
 namespace lab2 {
 	class Gregorian : public Date {
         public:
+        Gregorian(int , int , int);
 		/* Default constructor. Should construct a 
 		 * Gregorian calendar from the current date. */
-            Gregorian();
-            Gregorian(const Julian&);
+        Gregorian();
+        Gregorian(const Date&);
     };
 }
 #endif

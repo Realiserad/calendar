@@ -1,10 +1,11 @@
 #include "Date.hpp"
 #include <stdexcept>
 namespace lab2 {
-	Date::Date(int year, int month, int day) 
+	Date::Date(int year, int month, int day, bool gregorian) 
 		: mYear(year), 
 		  mMonth(month), 
-		  mDay(day) {
+		  mDay(day),
+		  gregorian(gregorian) {
 		// Do some error checking here
 		if (year < 1858 || year > 2558) {
 			throw std::invalid_argument("Invalid year");
@@ -32,6 +33,10 @@ namespace lab2 {
 				if (day > 30)
 					throw std::invalid_argument("Invalid day");
 			}
+	}
+	
+	bool Date::is_gregorian() {
+		return gregorian;
 	}
 	
 	int Date::year() const { return mYear; }

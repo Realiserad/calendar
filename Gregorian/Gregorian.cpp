@@ -5,6 +5,7 @@
 #include "../Date/Date.hpp"
 
 namespace lab2 {
+	Gregorian::Gregorian(int y, int m, int d) : Date(y,m,d, true);
 	Gregorian::Gregorian() : Date() {
 		// Get UNIX timestamp in ms
 		time_t ms = time(0);
@@ -14,10 +15,12 @@ namespace lab2 {
 		mMonth = now->tm_mon + 1;   
 		mDay = now->tm_mday;
 	}
-    Gregorian::Gregorian(const Julian& j) {
-		mYear = j.year();
-		mMonth = j.month();
-		mDay = j.day();
-       convert_to_gregorian();
+    Gregorian::Gregorian(const Date& d) {
+		mYear = d.year();
+		mMonth = d.month();
+		mDay = d.day();
+		if (!d.gregorian()) {
+			convert_to_julian();
+		}
     }
 }
