@@ -5,7 +5,7 @@
 #include <assert.h>
 
 int main() {
-	lab2::Julian j(1900, 1, 1);
-	lab2::Gregorian g = j;
+	lab2::Gregorian g(1858, 11, 16);
+	lab2::Julian j = g;
 	std::cout << j << std::endl;
 }
