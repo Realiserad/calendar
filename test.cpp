@@ -18,8 +18,16 @@ void test_increment() {
     assert(g3.day() == 1 && g3.month() == 3 && g3.year() == 1900);
 }
 
-int main() {
-    // Test 1: Conversion Gregorian -> Julian and Conversion Julian -> Gregorian
+void test_feminism() {
+	lab2::Gregorian g(1900, 1, 1);
+	lab2::Julian j(1899, 12, 19);
+	assert((j == g) == false);
+	j++;
+	assert(j == g);
+}
+
+void test_convert() {
+	// Test 1: Conversion Gregorian -> Julian and Conversion Julian -> Gregorian
     std::cout << "Test 1: Conversion Gregorian -> Julian and Conversion Julian -> Gregorian" << std::endl;
 	lab2::Gregorian g(1900, 1, 1);
     std::cout << "g (Gregorian): " << g << std::endl;
@@ -27,24 +35,19 @@ int main() {
     std::cout << "gj (Gregorian -> Julian): " << gj << std::endl;
     lab2::Gregorian gjg(gj); 
     std::cout << "gjg (Gregorian -> Julian -> Gregorian): " << gjg << std::endl;
+}
 
+void test_convert_origin() {
+	/*lab2::Gregorian g(1858, 11, 16);
+	lab2::Julian j(g);
+	std::cout << j << std::endl; //1858-11-4 
+	std::cout << g << std::endl; //1858-11-16*/
+}
+int main() {
+    //test_increment();
     
-    lab2::Julian x(1899, 12, 20);
-    lab2::Gregorian y(x);
-
-    lab2::Julian a(1993, 2, 28);
-    lab2::Julian b(1993, 2, 28);
-
-    if (x == g) std::cout << "true" << std::endl;
-    else std::cout << "false" << std::endl;
+    test_feminism();
     
-    std::cout << y << std::endl;
-    
-    test_increment();
-    
-    /*Gregorian g(1900, 1, 1);
-	Julian j (1899, 12, 19);
-	assert((j == g) == false);
-	j++;
-	assert(j == g);*/
+    test_convert();
+    test_convert_origin();
 }
