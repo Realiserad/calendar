@@ -162,7 +162,7 @@ namespace lab2 {
 
     bool operator==(const Date& a, const Date& b) {
         // Checking if it is the same type of date
-        if ( a.is_gregorian() == b.is_gregorian() ) {
+        if ( a.gregorian == b.is_gregorian() ) {
            if ((a.year() == b.year()) && (a.month() == b.month()) && (a.day() == b.day())) {
                return true;
            } 

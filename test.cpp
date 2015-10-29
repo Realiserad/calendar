@@ -47,9 +47,40 @@ void test_convert() {
     std::cout << "gjg (Gregorian -> Julian -> Gregorian): " << gjg << std::endl;
 }
 
+void test_add_month() {
+    lab2::Gregorian g(2004, 1, 30);
+    g.add_month(1); 
+    lab2::Gregorian gTest(2004, 2, 29); 
+    assert(g == gTest);
+
+    lab2::Gregorian g2(2003, 1, 30);
+    g2.add_month(1);
+    lab2::Gregorian g2Test(2003, 2, 28);
+    assert(g2 == g2Test);
+}
+
+void test_add_year() {
+    lab2::Gregorian g(2000, 1, 20);
+    g.add_year(5); 
+    lab2::Gregorian gTest(2005, 1, 20); 
+    assert(g == gTest);
+
+    lab2::Gregorian g2(2004, 2, 29);
+    g.add_year(1); 
+    lab2::Gregorian g2Test(2005, 2, 28); 
+    assert(g2 == g2Test);
+
+    lab2::Gregorian g3(2004, 2, 29);
+    g.add_year(4); 
+    lab2::Gregorian g3Test(2004, 2, 28); 
+    assert(g3 == g3Test);
+}
+
 int main() {
     test_increment();
     test_feminism();
     test_convert();
     test_pointers();
+    test_add_month();
+    test_add_year(); 
 }
