@@ -34,6 +34,8 @@ namespace lab2 {
 			}
 	}
 	
+	~Date() {}
+	
 	/// Convert the date stored in this object to Julian.
 	void Date::convert_to_julian() {
 		convert( true );

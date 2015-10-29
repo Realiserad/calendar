@@ -27,7 +27,7 @@ namespace lab2 {
 		 * to 2558-12-31. */
 		Date(int year, int month, int day);
 		/* Important to define the destructor as virtual! */
-		virtual ~Date() = default;
+		virtual ~Date();
 		/* Default constructor. */
 		Date() = default;
 		/* Returns the year of this date. */
