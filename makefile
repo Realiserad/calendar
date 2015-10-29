@@ -7,7 +7,7 @@ greg :
 julia :
 	$(CC) ./Julian/Julian.cpp $(FLAGS) -c
 clean :
-	rm -rf *.o *.gch *.out
+	rm -rf *.o *.gch *.out .*.*.swp
 	@echo "Crap destroyed successfully!"
 all : 
 	@echo "No rule defined yet."

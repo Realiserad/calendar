@@ -1,5 +1,6 @@
 #include "Date.hpp"
 #include <stdexcept>
+#include "../Gregorian/Gregorian.hpp"
 namespace lab2 {
 	Date::Date(int year, int month, int day, bool gregorian) 
 		: mYear(year), 
@@ -158,4 +159,29 @@ namespace lab2 {
 		// mMonth = m + 3 - (12*(m/10));
 		// mYear = (100*b) + d - 4800 + (m/10);
 	}
+
+    bool operator==(const Date& a, const Date& b) {
+        // Checking if it is the same type of date
+        if ( (a.is_gregorian() && b.is_gregorian()) || (!a.is_gregorian() && !b.is_gregorian()) ) {
+           if ((a.year() == b.year()) && (a.month() == b.month()) && (a.day() == b.day())) {
+               return true;
+           } 
+           else return false; 
+        }
+        // Check gregorian == julian
+        else if ( a.is_gregorian() && !b.is_gregorian() ) {
+            Gregorian tempX(b); 
+            if ((a.year() == tempX.year()) && (a.month() == tempX.month()) && (a.day() == tempX.day())) 
+                return true;
+            else return false;
+        }
+        // Check julian == gregorian
+        else if ( !a.is_gregorian() && b.is_gregorian() ) {
+            Julian tempX(b); 
+            if ((a.year() == tempX.year()) && (a.month() == tempX.month()) && (a.day() == tempX.day())) 
+                return true;
+            else return false;
+        }
+        else return false;
+    }
 }

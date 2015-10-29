@@ -62,6 +62,9 @@ namespace lab2 {
 		}
         
 		bool is_gregorian() const;
+
+        // == Operator
+        friend bool operator==(const Date&, const Date&);
 	};
 }
 #endif
