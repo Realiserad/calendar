@@ -13,7 +13,7 @@ namespace lab2 {
 		mDay = d.day();
 		mYear = d.year();
 		mMonth = d.month();
-		if (d.is_gregorian) {
+		if (d.is_gregorian()) {
 			convert_to_julian();
 		}
 	}

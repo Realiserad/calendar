@@ -15,9 +15,8 @@ namespace lab2 {
 	 */
 	class Date {
 		protected:
-		bool gregorian;
 		int mYear, mMonth, mDay;
-		bool is_gregorian();
+		bool gregorian;
 		void convert(bool);
 		void convert_to_julian( void );
 		void convert_to_gregorian( void );
@@ -61,6 +60,8 @@ namespace lab2 {
 			os << date.year() << "-" << date.month() << "-" << date.day();
 			return os;
 		}
+        
+		bool is_gregorian() const;
 	};
 }
 #endif
