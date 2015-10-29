@@ -20,7 +20,7 @@ namespace lab2 {
 		mMonth = d.month();
 		mDay = d.day();
 		if (!d.is_gregorian()) {
-			convert_to_julian();
+			convert_to_gregorian();
 		}
     }
 }

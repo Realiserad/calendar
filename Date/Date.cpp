@@ -106,11 +106,11 @@ namespace lab2 {
 		if (convert_to_julian) {
 			// For a date in the gregorian calendar
 			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
-            std::cout << "if - sats " << JD << std::endl;
+            // std::cout << "if - sats " << JD << std::endl;
 		} else {
 			// For a date in the Julian calendar
 			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
-            std::cout << "else - sats " << JD << std::endl;
+            // std::cout << "else - sats " << JD << std::endl;
 		}
 		
 		//////////////////////////////////////////////////////
