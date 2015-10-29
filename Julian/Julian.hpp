@@ -10,6 +10,7 @@ namespace lab2 {
 		Julian(int, int, int);
 		Julian(const Date&);
 		Julian& operator++(int);
+		bool is_leap_year(int);
 	};
 }
 #endif

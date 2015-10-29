@@ -38,23 +38,23 @@ namespace lab2 {
 		/* Returns the day of this date. */
 		virtual unsigned int day() const;
 		/* Returns the number associated with the current weekday. */
-		virtual unsigned int week_day();
+		virtual unsigned int week_day() = 0;
 		/* Returns the number of days in a week. */
 		virtual unsigned int days_per_week();
 		/* Returns the number of days in the current month. */
-		virtual unsigned int days_this_month();
+		virtual unsigned int days_this_month() = 0;
 		/* Returns the name of the current weekday. */
-		virtual std::string week_day_name();
+		virtual std::string week_day_name() = 0;
 		/* Returns name of current month. */
 		virtual std::string month_name();
 		/* Increments the current year by the number specified. */
-		template <typename T> 
-		T add_year(int);
+		Date add_year(int) = 0;
 		/* Increments the current year by the number specified. */
-		template <typename T> 
-		T add_month(int);
+		Date add_month(int) = 0;
 		/* This function shall return the MJD representation of the current day. */
 		int mod_julian_day();
+		
+		virtual bool is_leap_year() = 0;
 		
 		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
 			os << date.year() << "-" << date.month() << "-" << date.day();

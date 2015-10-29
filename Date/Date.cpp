@@ -61,17 +61,76 @@ namespace lab2 {
 	}
 	
 	std::string Date::month_name() {
-		return "";
+		if (mMonth == 1) {
+			return "January";
+		}
+		if (mMonth == 2) {
+			return "February"
+		}
+		if (mMonth == 3) {
+			return "March";
+		}
+		if (mMonth == 4) {
+			return "April";
+		}
+		if (mMonth == 5) {
+			return "May";
+		}
+		if (mMonth == 6) {
+			return "June";
+		}
+		if (mMonth == 7) {
+			return "July";
+		}
+		if (mMonth == 8) {
+			return "August";
+		}
+		if (mMonth == 9) {
+			return "September";
+		}
+		if (mMonth == 10) {
+			return "October";
+		}
+		if (mMonth == 11) {
+			return "November";
+		}
+		if (mMonth == 12) {
+			return "December";
+		}
+		return "Unknown";
 	}
 	
-	template <typename T>
-	T Date::add_year(int y) {
-		return this;
+	Date& Date::add_year(int n) {
+		mYear += n;
+		return *this;
+		if (mMonth == 2 && mDay == 29 && !is_leap_year(mYear)) {
+			mDay--;
+		}
+		return *this;
 	}
 	
-	template <typename T>
-	T Date::add_month(int m) {
-		return this;
+	Date& Date::add_month(int n) {
+		int years = n / 12;
+		int months = n - (years * 12);
+		add_years(years);
+		mMonth += months;
+		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+			if (mDay > 30) {
+				mDay = 30;
+			}
+		}
+		if (mMonth == 2) {
+			if (is_leap_year(mYear)) {
+				if (mDay > 29) {
+					mDay = 29;
+				}
+			} else {
+				if (mDay > 28) {
+					mDay = 28;
+				}
+			}
+		}
+		return *this;
 	}
 	
 	int Date::mod_julian_day() {
