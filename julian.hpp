@@ -1,7 +1,7 @@
 #ifndef __JULIAN
 #define __JULIAN
-#include "../Date/Date.hpp"
-#include "../Gregorian/Gregorian.hpp"
+#include "date.hpp"
+#include "gregorian.hpp"
 
 namespace lab2 {
 	class Julian : public Date {
@@ -9,7 +9,7 @@ namespace lab2 {
 		Julian();
 		Julian(int, int, int);
 		Julian(const Date&);
-		Julian& operator++(int);
+		Julian operator++(int);
 	};
 }
 #endif

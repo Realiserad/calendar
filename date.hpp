@@ -55,15 +55,18 @@ namespace lab2 {
 		int mod_julian_day();
 		bool is_leap_year();
 		
+        
+		bool is_gregorian() const;
+
+        // ------------------------------------ operators --------------------
+        /* << operator */
 		friend std::ostream& operator <<(std::ostream& os, const Date& date) {
 			os << date.year() << "-" << date.month() << "-" << date.day();
 			return os;
 		}
-        
-		bool is_gregorian() const;
-
         // == Operator
         friend bool operator==(const Date&, const Date&);
+        
 	};
 }
 #endif

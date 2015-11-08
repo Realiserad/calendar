@@ -1,8 +1,8 @@
 #include <ctime>
 #include <iostream>
-#include "Julian.hpp"
-#include "../Date/Date.hpp"
-#include "../Gregorian/Gregorian.hpp"
+#include "julian.hpp"
+#include "date.hpp"
+#include "gregorian.hpp"
 
 namespace lab2 {
     Julian::Julian(int y, int m, int d) : Date(y,m,d, false) { 
@@ -33,7 +33,7 @@ namespace lab2 {
 		}
 	}
 	
-	Julian& Julian::operator++(int) {
+	Julian Julian::operator++(int) {
 		++mDay;
 		if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
 			if (mDay > 31) {

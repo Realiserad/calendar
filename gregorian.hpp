@@ -1,7 +1,7 @@
 #ifndef __GREGORIAN
 #define __GREGORIAN
-#include "../Date/Date.hpp"
-#include "../Julian/Julian.hpp"
+#include "date.hpp"
+#include "julian.hpp"
 
 namespace lab2 {
 	class Gregorian : public Date {
@@ -11,7 +11,7 @@ namespace lab2 {
 		 * Gregorian calendar from the current date. */
         Gregorian();
         Gregorian(const Date&);
-        Gregorian& operator++(int);
+        Gregorian operator++(int);
     };
 }
 #endif

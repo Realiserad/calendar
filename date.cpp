@@ -1,6 +1,6 @@
-#include "Date.hpp"
+#include "date.hpp"
 #include <stdexcept>
-#include "../Gregorian/Gregorian.hpp"
+#include "gregorian.hpp"
 namespace lab2 {
 	Date::Date(int year, int month, int day, bool gregorian) 
 		: mYear(year), 

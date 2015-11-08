@@ -1,8 +1,8 @@
 #include <iostream>
 #include <assert.h>
-#include "Date/Date.cpp"
-#include "Gregorian/Gregorian.cpp"
-#include "Julian/Julian.cpp"
+#include "Date.cpp"
+#include "Gregorian.cpp"
+#include "Julian.cpp"
 
 /// test operator++(int)
 void test_increment() {
@@ -76,6 +76,10 @@ void test_add_year() {
     assert(g3 == g3Test);
 }
 
+void test_operators() {
+    
+}
+
 int main() {
     test_increment();
     test_feminism();
@@ -83,4 +87,5 @@ int main() {
     test_pointers();
     test_add_month();
     test_add_year(); 
+    test_operators();
 }

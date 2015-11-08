@@ -1,8 +1,8 @@
 #include <ctime>
 #include <iostream>
-#include "Gregorian.hpp"
-#include "../Julian/Julian.hpp"
-#include "../Date/Date.hpp"
+#include "gregorian.hpp"
+#include "julian.hpp"
+#include "date.hpp"
 
 namespace lab2 {
 	Gregorian::Gregorian(int y, int m, int d) : Date(y,m,d, true) {}
@@ -25,7 +25,7 @@ namespace lab2 {
 			convert_to_gregorian();
 		}
     }
-    Gregorian& Gregorian::operator++(int) {
+    Gregorian Gregorian::operator++(int) {
 		++mDay;
 		if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
 			if (mDay > 31) {
