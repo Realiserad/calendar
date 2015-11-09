@@ -87,7 +87,13 @@ void test_relational() {
 	assert(diff == 0);
 }
 
+void test_cout() {
+	lab2::Gregorian j(1993, 02, 16);
+	std::cout << j << std::endl;
+}
+
 int main() {
+	test_cout();
     test_increment();
     test_feminism();
     test_convert();
