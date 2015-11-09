@@ -2,7 +2,7 @@
 #define __DATE
 #include <string>
 #include <iostream>
-namespace lab2 {	
+namespace lab2 {
 	/**
 	 * Abstract class for a Date which specifies required
 	 * functionality of derived classes "Gregorian" and
@@ -32,27 +32,28 @@ namespace lab2 {
 		/* Default constructor. */
 		Date() = default;
 		/* Returns the year of this date. */
-		virtual int year() const;
+		int year() const;
 		/* Returns the month of this date. */
-		virtual unsigned int month() const;
+		unsigned int month() const;
 		/* Returns the day of this date. */
-		virtual unsigned int day() const;
+		unsigned int day() const;
 		/* Returns the number associated with the current weekday. */
-		virtual unsigned int week_day();
+		unsigned int week_day() const;
 		/* Returns the number of days in a week. */
-		virtual unsigned int days_per_week() const;
+		unsigned int days_per_week() const;
 		/* Returns the number of days in the current month. */
-		virtual unsigned int days_this_month() const;
+		unsigned int days_this_month() const;
 		/* Returns the name of the current weekday. */
-		virtual std::string week_day_name() const;
+		std::string week_day_name() const;
 		/* Returns name of current month. */
-		virtual std::string month_name() const;
+		std::string month_name() const;
 		/* Increments the current year by the number specified. */
 		Date& add_year(int);
 		/* Increments the current year by the number specified. */
 		Date& add_month(int);
 		/* This function shall return the MJD representation of the current day. */
 		int mod_julian_day() const;
+		int julian_day() const;
 		bool is_leap_year() const;
 		
         
@@ -66,8 +67,27 @@ namespace lab2 {
 		}
         // == Operator
         friend bool operator==(const Date&, const Date&);
+        friend bool operator!=(const Date&, const Date&);
 
         friend int operator-(const Date&, const Date&);
+        
+        Date& operator++(int); // Postfix increment
+        Date& operator++(); // Prefix increment
+        Date& operator--(int); // Postfix decrement
+        Date& operator--(); // Prefix decrement
+        Date& operator+=(int); // addition assignment
+        Date& operator-=(int); // subtraction assignment
+        bool operator>(Date&);
+        bool operator>=(Date&);
+        bool operator<=(Date&);
+        bool operator<(Date&);
+        bool operator-(Date&);
+        Date& add_days(int);
+        Date& add_day();
+        Date& remove_day();
+        Date& remove_days(int);
+        Date& add_year();
+        Date& add_month();
 	};
 }
 #endif
