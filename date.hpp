@@ -71,17 +71,17 @@ namespace lab2 {
 
         friend int operator-(const Date&, const Date&);
         
-        Date& operator++(int); // Postfix increment
+        Date operator++(int); // Postfix increment
         Date& operator++(); // Prefix increment
-        Date& operator--(int); // Postfix decrement
+        Date operator--(int); // Postfix decrement
         Date& operator--(); // Prefix decrement
         Date& operator+=(int); // addition assignment
         Date& operator-=(int); // subtraction assignment
-        bool operator>(Date&);
-        bool operator>=(Date&);
-        bool operator<=(Date&);
-        bool operator<(Date&);
-        bool operator-(Date&);
+        bool operator>(const Date&) const;
+        bool operator>=(const Date&) const;
+        bool operator<=(const Date&) const;
+        bool operator<(const Date&) const;
+        bool operator-(const Date&) const;
         Date& add_days(int);
         Date& add_day();
         Date& remove_day();

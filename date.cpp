@@ -368,38 +368,42 @@ namespace lab2 {
 		return *this;
 	}
 	
-	bool Date::operator -(Date& d) {
-		return julian_day() - d.julian_day();
+	int Date::operator -(const Date& l, const Date& r) const {
+		return l.julian_day() - r.julian_day();
 	}
 	
 	// Postfix increment e.g julian++
-	Date& Date::operator++(int) {
-		return add_day();
+	Date Date::operator++(int) {
+		Date d = *this;
+		add_day();
+		return d;
 	}
 	
 	Date& Date::operator++() {
 		return add_day();
 	}
 	
-	bool Date::operator<(Date& d) {
+	bool Date::operator<(const Date& d) const {
 		return julian_day() < d.julian_day();
 	}
 	
-	bool Date::operator>(Date& d) {
+	bool Date::operator>(const Date& d) const  {
 		return julian_day()>d.julian_day();
 	}
 	
-	bool Date::operator>=(Date& d) {
+	bool Date::operator>=(const Date& d) const {
 		return julian_day()>=d.julian_day();
 	}
 	
-	bool Date::operator<=(Date& d) {
+	bool Date::operator<=(const Date& d) const {
 		return julian_day()<=d.julian_day();
 	}
 	
 	// Postfix decrement e.g julian--
-	Date& Date::operator--(int) {
+	Date Date::operator--(int) {
+		Date d = *this;
 		return remove_day();
+		return d;
 	}
 	
 	Date& Date::operator--() {

@@ -13,6 +13,7 @@ all :
 	$(CC) $(FLAGS) -c julian.cpp
 	$(CC) $(FLAGS) -c date.cpp
 	$(CC) $(FLAGS) -c gregorian.cpp
+	$(CC) $(FLAGS) test.cpp
 test :
 	$(CC) $(FLAGS) test.cpp -o test.out
 	./test.out

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <assert.h>
-#include "Date.cpp"
-#include "Gregorian.cpp"
-#include "Julian.cpp"
+#include "date.cpp"
+#include "gregorian.cpp"
+#include "julian.cpp"
 
 /// test operator++(int)
 void test_increment() {
