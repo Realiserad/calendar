@@ -53,7 +53,7 @@ namespace lab2 {
 		Date& add_month(int);
 		/* This function shall return the MJD representation of the current day. */
 		int mod_julian_day() const;
-		bool is_leap_year();
+		bool is_leap_year() const;
 		
         
 		bool is_gregorian() const;

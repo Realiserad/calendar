@@ -17,23 +17,14 @@ namespace lab2 {
 		if (day < 1) {
 			throw std::invalid_argument("Invalid day");
 		}
-		if (month == 1 ||
-			month == 3 ||
-			month == 5 ||
-			month == 7 ||
-			month == 8 ||
-			month == 10 ||
-			month == 12) {
-				if (day > 31)
-					throw std::invalid_argument("Invalid day");
-			}
-		if (month == 4 ||
-			month == 6 ||
-			month == 9 ||
-			month == 11) {
-				if (day > 30)
-					throw std::invalid_argument("Invalid day");
-			}
+		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+			if (day > 31)
+				throw std::invalid_argument("Invalid day");
+		}
+		if (month == 4 || month == 6 || month == 9 || month == 11) {
+			if (day > 30)
+				throw std::invalid_argument("Invalid day");
+		}
 	}
 	
 	bool Date::is_gregorian() const {
@@ -60,11 +51,23 @@ namespace lab2 {
 	}
 	
 	unsigned int Date::days_this_month() const {
-		return 31;
+		if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
+			return 31;
+		}
+		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+			return 30;
+		}
+		if (mMonth == 2) {
+			if (is_leap_year()) {
+				return 29;
+			}
+			return 28;
+		}
+		return -1;
 	}
 	
 	std::string Date::week_day_name() const {
-		return "";
+		return "foo";
 	}
 	
 	std::string Date::month_name() const {
@@ -139,7 +142,7 @@ namespace lab2 {
 		return *this;
 	}
 	
-	bool Date::is_leap_year() {
+	bool Date::is_leap_year() const {
 		if (gregorian) {
 			return mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0);
 		}
@@ -147,7 +150,7 @@ namespace lab2 {
 	}
 	
 	int Date::mod_julian_day() const {
-		return 1337;
+		return 1337; //TODO
 	}
 	
 	Date::~Date() {}
