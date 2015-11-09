@@ -40,19 +40,19 @@ namespace lab2 {
 		/* Returns the number associated with the current weekday. */
 		virtual unsigned int week_day();
 		/* Returns the number of days in a week. */
-		virtual unsigned int days_per_week();
+		virtual unsigned int days_per_week() const;
 		/* Returns the number of days in the current month. */
-		virtual unsigned int days_this_month();
+		virtual unsigned int days_this_month() const;
 		/* Returns the name of the current weekday. */
-		virtual std::string week_day_name();
+		virtual std::string week_day_name() const;
 		/* Returns name of current month. */
-		virtual std::string month_name();
+		virtual std::string month_name() const;
 		/* Increments the current year by the number specified. */
 		Date& add_year(int);
 		/* Increments the current year by the number specified. */
 		Date& add_month(int);
 		/* This function shall return the MJD representation of the current day. */
-		int mod_julian_day();
+		int mod_julian_day() const;
 		bool is_leap_year();
 		
         
@@ -66,7 +66,8 @@ namespace lab2 {
 		}
         // == Operator
         friend bool operator==(const Date&, const Date&);
-        
+
+        friend int operator-(const Date&, const Date&);
 	};
 }
 #endif

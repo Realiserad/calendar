@@ -45,22 +45,29 @@ namespace lab2 {
     unsigned int Date::day() const { return mDay; }
 	
 	unsigned int Date::week_day() {
-		return 0;
+        // https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
+        int c;
+        c = (mYear / 100) % 4;
+        if (c == 1) c = 5;
+        else if (c == 2) c = 3;
+        else if (c == 3) c = 1;
+
+		return (mDay + mMonth + mYear + (mYear/4) + c) % 7;
 	}
 	
-	unsigned int Date::days_per_week() {
+	unsigned int Date::days_per_week() const {
 		return 7;
 	}
 	
-	unsigned int Date::days_this_month() {
+	unsigned int Date::days_this_month() const {
 		return 31;
 	}
 	
-	std::string Date::week_day_name() {
+	std::string Date::week_day_name() const {
 		return "";
 	}
 	
-	std::string Date::month_name() {
+	std::string Date::month_name() const {
 		if (mMonth == 1) {
 			return "January";
 		}
@@ -139,7 +146,7 @@ namespace lab2 {
 		return mYear % 4 == 0;
 	}
 	
-	int Date::mod_julian_day() {
+	int Date::mod_julian_day() const {
 		return 1337;
 	}
 	

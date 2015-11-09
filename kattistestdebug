@@ -1,0 +1,27 @@
+INFO: Testing 'lab2::Julian'...
+ * missing/invalid postfix increment: date++ should yield an rvalue
+ * missing/invalid postfix increment: date-- should yield an rvalue
+ * missing/invalid prefix increment: ++date should yield an lvalue
+ * missing/invalid prefix increment: --date should yield an lvalue
+ * missing/invalid `some_date += n`
+ * missing/invalid `some_date -= n`
+ * missing/invalid `int x = date_a - date_b`
+ * missing/invalid member-function `mod_julian_day () const`
+ * missing/invalid member-function `days_per_week () const
+ * missing/invalid member-function `days_this_month () const
+ * missing/invalid member-function `week_day_name () const`
+ * missing/invalid member-function `month_name () const`
+---------------------------------------------------------------------
+In file included from test_entry.hpp:8:0,
+                 from runner.cpp:1:
+interpreter.hpp: In instantiation of the_date_interpreter<T, Julian, Gregorian>::the_date_interpreter(const natch::basic_environment&) [with T = lab2::Julian; Julian = lab2::Julian; Gregorian = lab2::Gregorian]::__lambda21:
+interpreter.hpp:74:25:   required from struct the_date_interpreter<T, Julian, Gregorian>::the_date_interpreter(const natch::basic_environment&) [with T = lab2::Julian; Julian = lab2::Julian; Gregorian = lab2::Gregorian]::__lambda21
+interpreter.hpp:103:8:   required from the_date_interpreter<T, Julian, Gregorian>::the_date_interpreter(const natch::basic_environment&) [with T = lab2::Julian; Julian = lab2::Julian; Gregorian = lab2::Gregorian]
+interpreter.hpp:162:18:   required from the_date_specific_interpreter<T, Julian, Gregorian>::the_date_specific_interpreter(const natch::basic_environment&) [with T = lab2::Julian; Julian = lab2::Julian; Gregorian = lab2::Gregorian]
+test_entry.hpp:99:78:   required from here
+interpreter.hpp:81:11: error: passing const lab2::Julian as this argument of virtual unsigned int lab2::Date::week_day() discards qualifiers [-fpermissive]
+           env.output ("week_day", src->week_day ());
+           ^
+interpreter.hpp:105: confused by earlier errors, bailing out
+Preprocessed source stored into ./ccxsctn2.out file, please attach this to your bugreport.
+Exited with error status 1

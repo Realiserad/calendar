@@ -12,6 +12,11 @@ namespace lab2 {
         Gregorian();
         Gregorian(const Date&);
         Gregorian operator++(int);
+        Gregorian& operator++(); // Prefix increment
+        Gregorian operator--(int); // Postfix decrement
+        Gregorian& operator--(); // Prefix decrement
+        Gregorian& operator+=(const int); // addition assignment
+        Gregorian& operator-=(const int); // subtraction assignment
     };
 }
 #endif
