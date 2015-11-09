@@ -143,6 +143,10 @@ namespace lab2 {
 		int months = n - (years * 12);
 		add_year(years);
 		mMonth += months;
+		if (mMonth > 13) {
+			++mYear;
+			mMonth -= 12;
+		}
 		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
 			if (mDay > 30) {
 				mDay = 30;
@@ -188,7 +192,7 @@ namespace lab2 {
 	}
 	
 	int Date::mod_julian_day() const {
-		return julian_day() - 2400000;
+		return julian_day() - 2400000.5;
 	}
 	
 	Date::~Date() {}
@@ -332,8 +336,15 @@ namespace lab2 {
 	}
 	
 	Date& Date::add_days(int days_to_add) {
-		for (int i = 0; i < days_to_add; ++i) {
-			add_day();
+		if (days_to_add < 0) {
+			for (int i = 0; i > days_to_add; --i) {
+				remove_day();
+			}
+		}
+		else {
+			for (int i = 0; i < days_to_add; ++i) {
+				add_day();
+			}
 		}
 		return *this;
 	}
@@ -362,13 +373,20 @@ namespace lab2 {
 	}
 	
 	Date& Date::remove_days(int days_to_remove) {
-		for (int i = 0; i < days_to_remove; ++i) {
-			remove_day();
+		if (days_to_remove < 0) {
+			for (int i = 0; i > days_to_remove; --i) {
+				add_day();
+			}
+		}
+		else {
+			for (int i = 0; i < days_to_remove; ++i) {
+				remove_day();
+			}
 		}
 		return *this;
 	}
 	
-	int Date::operator -(const Date& l, const Date& r) const {
+	int operator -(const Date& l, const Date& r) {
 		return l.julian_day() - r.julian_day();
 	}
 	

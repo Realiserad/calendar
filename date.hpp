@@ -81,7 +81,6 @@ namespace lab2 {
         bool operator>=(const Date&) const;
         bool operator<=(const Date&) const;
         bool operator<(const Date&) const;
-        bool operator-(const Date&) const;
         Date& add_days(int);
         Date& add_day();
         Date& remove_day();

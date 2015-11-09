@@ -80,6 +80,13 @@ void test_operators() {
     
 }
 
+void test_relational() {
+	lab2::Julian j1;
+	lab2::Julian j2;
+	int diff = j1-j2;
+	assert(diff == 0);
+}
+
 int main() {
     test_increment();
     test_feminism();
@@ -88,4 +95,5 @@ int main() {
     test_add_month();
     test_add_year(); 
     test_operators();
+    test_relational();
 }
