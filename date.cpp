@@ -76,18 +76,18 @@ namespace lab2 {
 	
 	unsigned int Date::week_day() const {
 		// https://en.wikipedia.org/wiki/Julian_day
-		return (julian_day() + 1) % 7;
+		return (julian_day() % 7) + 1;
 	}
 	
 	std::string Date::week_day_name() const {
 		int w =  week_day();
-		if (w == 0) return "Sunday";
-		if (w == 1) return "Mondag";
+		if (w == 1) return "Monday";
 		if (w == 2) return "Tuesday";
 		if (w == 3) return "Wednesday";
 		if (w == 4) return "Thursday";
 		if (w == 5) return "Friday";
-		return "Saturday";
+		if (w == 6) return "Saturday";
+		return "Sunday";
 	}
 	
 	std::string Date::month_name() const {
@@ -143,7 +143,13 @@ namespace lab2 {
 		int months = n - (years * 12);
 		add_year(years);
 		mMonth += months;
-		if (mMonth > 13) {
+
+        if (mMonth < 1) {
+            mMonth = 12 + mMonth;
+            --mYear;
+        }
+
+		if (mMonth > 12) {
 			++mYear;
 			mMonth -= 12;
 		}
@@ -238,14 +244,9 @@ namespace lab2 {
 		if (to_julian) {
 			// For the Julian calendar, calculate:
             f = JD + j; 
-			// b = 0;
-			// c = JD + 32082;
 		} else {
-            f = JD + j + (((4*JD+B)/146097)*3)/4+C;
 			// For the Gregorian calendar, calculate:
-			// double a = JD + 32044;
-			// b = (4*a+3)/146097;
-			// c = a - ((146097*b)/4);
+            f = JD + j + (((4*JD+B)/146097)*3)/4+C;
 		}
 		
         int e = r*f+v;
@@ -254,14 +255,6 @@ namespace lab2 {
         mDay = (h % s)/u+1;
         mMonth = ((h/s+m)%n)+1;
         mYear = (e/p)-y+(n+m-mMonth)/n;
-		// Then for both calendars, calculate:
-		// double d = (4*c+3)/1461;
-		// double e = c - ((1461*d)/4);
-		// double m = (5*e+2)/153;
-		//
-		// mDay = e - ((153*m + 2)/5) + 1;
-		// mMonth = m + 3 - (12*(m/10));
-		// mYear = (100*b) + d - 4800 + (m/10);
 	}
 
     bool operator==(const Date& a, const Date& b) {
@@ -352,19 +345,19 @@ namespace lab2 {
 	Date& Date::remove_day() {
 		--mDay;
 		if (mDay < 1) {
+			mMonth--;
 			if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
 				mDay = 31;
 			}
-			if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+			else if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
 				mDay = 30;
 			}
-			
-			if (mMonth == 2) {
+			else if (mMonth == 2) {
 				mDay = is_leap_year() ? 29 : 28;
 			}
-			mMonth--;
 			if (mMonth < 1) {
 				mMonth = 12;
+                mDay = 31;
 				--mYear;
 			}
 		}
@@ -379,7 +372,7 @@ namespace lab2 {
 			}
 		}
 		else {
-			for (int i = 0; i < days_to_remove; ++i) {
+			for (int i = 0; i < days_to_remove ; ++i) {
 				remove_day();
 			}
 		}

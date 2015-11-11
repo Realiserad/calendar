@@ -3,6 +3,8 @@
 #include "date.cpp"
 #include "gregorian.cpp"
 #include "julian.cpp"
+#include <ctime>
+#include "kattistime.h"
 
 /// test operator++(int)
 void test_increment() {
@@ -76,10 +78,6 @@ void test_add_year() {
     assert(g3 == g3Test);
 }
 
-void test_operators() {
-    
-}
-
 void test_relational() {
 	lab2::Julian j1;
 	lab2::Julian j2;
@@ -92,14 +90,72 @@ void test_cout() {
 	std::cout << j << std::endl;
 }
 
+
+void test_kattis1() {
+    lab2::Julian a (2140, 8, 9);
+    a.add_year(18);
+    a += 18;
+    a.add_month(18);
+    a -= 18;
+    a += -18;
+    a.add_year(-18);
+    a -= -18;
+    ++a;
+    a.add_month(-18);
+    --a;
+    a.add_year(5);
+    a += 5;
+    a.add_month(5);
+    a -= 5;
+    a += -5;
+    a.add_year(-5);
+    a -= -5;
+    ++a;
+    a.add_month(-5);
+    --a;
+    a.add_year(17);
+    a += 17;
+    a.add_month(17);
+    a -= 17;
+    // std::cout << a << std::endl;
+    std::cout << " -------------------------------------- " << std::endl;
+    a += -17;
+    std::cout << "FAIL: " << a << ", " << a.mod_julian_day() << std::endl; 
+    std::cout << "YEEY: " << "2158-12-23" << ", " << "109623" << std::endl; 
+}
+
+void test_kattis2() {
+    // lab2::Julian b;
+    // std::cout << b << std::endl;
+    // lab2::Gregorian c(b);
+    // std::cout << c << std::endl;
+    // lab2::Julian d(c);
+    // std::cout << d << std::endl;
+    // lab2::Julian a(2097,2,20);
+    // std::cout << a << ", mod: " << a.mod_julian_day() << std::endl;
+    // lab2::Gregorian b = a;
+    // std::cout << b << ", mod: " << b.mod_julian_day() << std::endl;
+    // lab2::Julian c = b;
+    // std::cout << c << ", mod: " << c.mod_julian_day() << std::endl;
+    
+    // std::cout << "FAIL: " << b << ", " << b.mod_julian_day() << std::endl; 
+    // lab2::Julian c(2034,7,26);
+    // std::cout << "FAIL: " << c << ", " << c.mod_julian_day() << std::endl; 
+    // lab2::Gregorian g(2034,8,8);
+    // std::cout << g << std::endl; 
+    // lab2::Julian j(g);
+    // std::cout << j << std::endl;
+}
+
 int main() {
-	test_cout();
-    test_increment();
-    test_feminism();
-    test_convert();
-    test_pointers();
-    test_add_month();
-    test_add_year(); 
-    test_operators();
-    test_relational();
+	// test_cout();
+    // test_increment();
+    // test_feminism();
+    // test_convert();
+    // test_pointers();
+    // test_add_month();
+    // test_add_year(); 
+    // test_relational();
+    // test_kattis1();
+    // test_kattis2();
 }

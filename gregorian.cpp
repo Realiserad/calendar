@@ -3,14 +3,29 @@
 #include "julian.hpp"
 #include "date.hpp"
 
+#define KATTIS (1)
+
+#if KATTIS
+#include "kattistime.h"
+#endif 
+
 namespace lab2 {
 	Gregorian::Gregorian(int y, int m, int d) : Date(y, m, d, true) {}
 	Gregorian::Gregorian() {
 		gregorian = true;
-		// Get UNIX timestamp in ms
-		time_t ms = time(0);
+
+#if KATTIS
+        // kattis time include "kattistime.h"
+        time_t mytime;
+        k_time(&mytime);
+        struct tm *now = gmtime(&mytime);
+#else
+        // local time
+		time_t ms = time(0); 
+		struct tm *now = gmtime(&ms);
+#endif
+
 		// Convert to Gregorian calendar format
-		struct tm *now = localtime(&ms);
 		mYear = now->tm_year + 1900;
 		mMonth = now->tm_mon + 1;   
 		mDay = now->tm_mday;
@@ -20,9 +35,10 @@ namespace lab2 {
 		mYear = d.year();
 		mMonth = d.month();
 		mDay = d.day();
-		gregorian = true;
 		if (!d.is_gregorian()) {
+            gregorian = false;
 			convert_to_gregorian();
+            gregorian = true;
 		}
     }
     
@@ -31,7 +47,9 @@ namespace lab2 {
 		mYear = d.year();
 		mDay = d.day();
 		if (!d.is_gregorian()) {
+            gregorian = false;
 			convert_to_gregorian();
+            gregorian = true;
 		}
 		return *this;
 	}
