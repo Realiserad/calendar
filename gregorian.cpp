@@ -42,6 +42,10 @@ namespace lab2 {
 		}
     }
     
+    Gregorian& Gregorian::operator=(Julian& j) {
+		std::cout << "problem solved" << std::endl;
+	}
+    
     Gregorian& Gregorian::operator=(Date& d) {
 		std::cout << "gregorian copy assign" << std::endl;
 		mMonth = d.month();
