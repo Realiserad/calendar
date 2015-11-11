@@ -3,7 +3,7 @@
 #include "julian.hpp"
 #include "date.hpp"
 
-#define KATTIS (1)
+#define KATTIS (0)
 
 #if KATTIS
 #include "kattistime.h"

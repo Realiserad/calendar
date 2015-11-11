@@ -3,7 +3,7 @@
 #include "date.hpp"
 #include "gregorian.hpp"
 
-#define KATTIS (1) 
+#define KATTIS (0) 
 
 #if KATTIS
 #include "kattistime.h"
