@@ -52,10 +52,15 @@ namespace lab2 {
 		mYear = d.year();
 		mMonth = d.month();
 		if (d.is_gregorian()) {
-            gregorian = true; 
 			convert_to_julian();
-            gregorian = false; 
 		}
+		return *this;
+	}
+	
+	Julian& Julian::operator=(Julian& j) {
+		mDay = j.day();
+		mYear = j.year();
+		mMonth = j.month();
 		return *this;
 	}
 }

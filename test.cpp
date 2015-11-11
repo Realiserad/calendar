@@ -207,6 +207,22 @@ void test_kattis2() {
     std::cout << "Kattis: $B => '2097-02-20, mod_julian_day() = 87037' should have been '2097-03-05, mod_julian_day() = 87037" << std::endl;
 }
 
+void test_copy_assign() {
+	/*lab2::Julian j1(1993,2,16);
+	lab2::Julian j2(1993,8,8);
+	j1 = j1;
+	j1 = j2;
+	
+	lab2::Gregorian g(2008,1,1);
+	j1=g;
+	std::cout << j1 << std::endl;*/
+	
+	lab2::Date *jp = new lab2::Julian(1994,2,2);
+	lab2::Date *gp = new lab2::Gregorian(1996,9,9);
+	*gp = *jp;
+	std::cout << *jp << std::endl;
+}
+
 
 int main() {
 	// test_cout();
@@ -218,7 +234,9 @@ int main() {
     // test_add_year(); 
     // test_relational();
     // test_kattis1();
-    test_kattis2();
+    //test_kattis2();
+    
+    test_copy_assign();
     
     // lab2::Gregorian y(2006, 8, 1);
     // std::cout << y << ", mod: " << y.mod_julian_day() << std::endl;

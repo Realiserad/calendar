@@ -10,6 +10,8 @@ namespace lab2 {
 		Julian(int, int, int);
 		Julian(const Date&);
 		Julian& operator=(Date&);
+		Julian& operator=(Julian&);
+		//Julian& operator=(Gregorian&);
 	};
 }
 #endif

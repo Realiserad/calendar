@@ -10,6 +10,7 @@ namespace lab2 {
         Gregorian(int, int, int);
         Gregorian(const Date&);
         Gregorian& operator=(Date&);
+        //Gregorian& operator=(Julian&);
     };
 }
 #endif

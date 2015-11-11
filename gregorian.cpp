@@ -43,13 +43,12 @@ namespace lab2 {
     }
     
     Gregorian& Gregorian::operator=(Date& d) {
+		std::cout << "gregorian copy assign" << std::endl;
 		mMonth = d.month();
 		mYear = d.year();
 		mDay = d.day();
 		if (!d.is_gregorian()) {
-            gregorian = false;
 			convert_to_gregorian();
-            gregorian = true;
 		}
 		return *this;
 	}
