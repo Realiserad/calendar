@@ -1,3 +1,5 @@
+Kattis-id: 956286
+
 • Why can prefix increment/decrement be declared in the abstract base-class, but not postfix?
 
 Därför att postfix-operatorn skall returnera en kopia av *this, som är en
