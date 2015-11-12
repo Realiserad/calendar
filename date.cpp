@@ -2,57 +2,186 @@
 #include <stdexcept>
 #include "gregorian.hpp"
 namespace lab2 {
-	Date::Date(int year, int month, int day, bool gregorian) 
+    // --------------------------- PROTECTED -------------------------------------
+	void Date::convert(Type t) {
+		// Ref: https://en.wikipedia.org/wiki/Julian_day#Calculation
+		
+		//////////////////////////////////////////////////////
+		//	Convert the current date to Julian Day (JD)
+		//////////////////////////////////////////////////////
+		int JD = julian_day(t);
+		
+		//////////////////////////////////////////////////////
+		//	Convert JD to (year, month, day) in the calendar 
+		//	format specified by convert_to_julian
+		//////////////////////////////////////////////////////
+        int f;
+        int y = 4716;
+        int j = 1401;
+        int m = 2;
+        int n = 12;
+        int r = 4;
+        int p = 1461; 
+        int v = 3;
+        int u = 5;
+        int s = 153;
+        int w = 2; 
+        int B = 274277;
+        int C = -38;
+		if (this -> type() == J) {
+			// For the Julian calendar, calculate:
+            f = JD + j; 
+		} 
+        else if (this -> type() == G) {
+			// For the Gregorian calendar, calculate:
+            f = JD + j + (((4*JD+B)/146097)*3)/4+C;
+		}
+        else f = -1; // Nor Gregorian or Julian
+		
+        int e = r*f+v;
+        int g = (e % p)/r;
+        int h = u*g+w;
+        mDay = (h % s)/u+1;
+        mMonth = ((h/s+m)%n)+1;
+        mYear = (e/p)-y+(n+m-mMonth)/n;
+	}
+
+	int Date::julian_day(Type t) const {
+		int a = (14 - mMonth) / 12;
+		int y = mYear + 4800 - a;
+		int mm = mMonth + 12*a - 3;
+		
+		int JD;
+		if (t == G) {
+			// For a date in the gregorian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
+            // std::cout << "if - sats " << JD << std::endl;
+		} 
+        else if (t == J) {
+			// For a date in the Julian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
+            // std::cout << "else - sats " << JD << std::endl;
+		}
+        else return -1; // Nor Gregorian or Julian
+		return JD;
+	}
+
+	int Date::julian_day() const {
+		int a = (14 - mMonth) / 12;
+		int y = mYear + 4800 - a;
+		int mm = mMonth + 12*a - 3;
+		
+		int JD;
+		if (this -> type() == G) {
+			// For a date in the gregorian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
+            // std::cout << "if - sats " << JD << std::endl;
+		} 
+        else if (this -> type() == J) {
+			// For a date in the Julian calendar
+			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
+            // std::cout << "else - sats " << JD << std::endl;
+		}
+        else return -1; // Nor Gregorian or Julian
+		return JD;
+	}
+    
+	bool Date::is_leap_year() const {
+		if (this -> type() == G) {
+			return mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0);
+		}
+		return mYear % 4 == 0;
+	}
+    
+	Date& Date::add_days(int days_to_add) {
+		if (days_to_add < 0) {
+			for (int i = 0; i > days_to_add; --i) {
+				remove_day();
+			}
+		}
+		else {
+			for (int i = 0; i < days_to_add; ++i) {
+				add_day();
+			}
+		}
+		return *this;
+	}
+
+	Date& Date::add_day() {
+        ++mDay;
+        if (mDay > int(days_this_month()) ) {
+            mDay = 1;
+            ++mMonth;
+            if (mMonth > 12) {
+                mMonth = 1;
+                ++mYear;
+            }
+        }
+        return *this;
+	}
+
+	Date& Date::remove_days(int days_to_remove) {
+		if (days_to_remove < 0) {
+			for (int i = 0; i > days_to_remove; --i) {
+				add_day();
+			}
+		}
+		else {
+			for (int i = 0; i < days_to_remove ; ++i) {
+				remove_day();
+			}
+		}
+		return *this;
+	}
+
+	Date& Date::remove_day() {
+		--mDay;
+		if (mDay < 1) {
+			mMonth--;
+			if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
+				mDay = 31;
+			}
+			else if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
+				mDay = 30;
+			}
+			else if (mMonth == 2) {
+				mDay = is_leap_year() ? 29 : 28;
+			}
+			if (mMonth < 1) {
+				mMonth = 12;
+                mDay = 31;
+				--mYear;
+			}
+		}
+		
+		return *this;
+	}
+
+    // ---------------------- Constructors / destructor ----------------------------
+
+	Date::Date(int year, int month, int day) 
 		: mYear(year), 
 		  mMonth(month), 
-		  mDay(day),
-		  gregorian(gregorian) {
+		  mDay(day) {
 		// Do some error checking here
-		if (year < 1858 || year > 2558) {
-			throw std::invalid_argument("Bad year");
-		}
-		if (month < 1 || month > 12) {
-			throw std::invalid_argument("Bad month");
-		}
-		if (day < 1) {
-			throw std::invalid_argument("Bad day");
-		}
-		if (days_this_month() == 31) {
-			if (day > 31)
-				throw std::invalid_argument("Bad day");
-		}
-		if (days_this_month() == 30) {
-			if (day > 30)
-				throw std::invalid_argument("Bad day");
-		}
-		if (mMonth == 2) {
-			if (!is_leap_year() && mDay > 28) {
-				throw new std::out_of_range("Bad day.");
-			}
-			if (is_leap_year() && mDay > 29) {
-				throw new std::out_of_range("Bad day.");
-			}
-		}
 	}
 	
-	bool Date::is_gregorian() const {
-		return gregorian;
-	}
-	
-	int Date::year() const { return mYear; }
+    Date::Date (const Date& d) {
+        mYear = d.year();
+        mMonth = d.month();
+        mDay = d.day();
+    }
+
+    int Date::year() const { return mYear; }
+
     unsigned int Date::month() const { return mMonth; }
+    
     unsigned int Date::day() const { return mDay; }
 	
-	/*unsigned int Date::week_day() const {
-        // https://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week
-        int c;
-        c = (mYear / 100) % 4;
-        if (c == 1) c = 5;
-        else if (c == 2) c = 3;
-        else if (c == 3) c = 1;
-
-		return (mDay + mMonth + mYear + (mYear/4) + c) % 7;
-	}*/
+	unsigned int Date::week_day() const {
+		// https://en.wikipedia.org/wiki/Julian_day
+		return (julian_day() % 7) + 1;
+	}
 	
 	unsigned int Date::days_per_week() const {
 		return 7;
@@ -74,10 +203,6 @@ namespace lab2 {
 		return -1;
 	}
 	
-	unsigned int Date::week_day() const {
-		// https://en.wikipedia.org/wiki/Julian_day
-		return (julian_day() % 7) + 1;
-	}
 	
 	std::string Date::week_day_name() const {
 		int w =  week_day();
@@ -172,218 +297,29 @@ namespace lab2 {
 		return *this;
 	}
 	
-	bool Date::is_leap_year() const {
-		if (gregorian) {
-			return mYear % 4 == 0 && (mYear % 100 != 0 || mYear % 400 == 0);
-		}
-		return mYear % 4 == 0;
-	}
-	
-	int Date::julian_day() const {
-		int a = (14 - mMonth) / 12;
-		int y = mYear + 4800 - a;
-		int mm = mMonth + 12*a - 3;
-		
-		int JD;
-		if (gregorian) {
-			// For a date in the gregorian calendar
-			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - (y/100) + (y/400) - 32045;
-            // std::cout << "if - sats " << JD << std::endl;
-		} else {
-			// For a date in the Julian calendar
-			JD = mDay + ((153*mm + 2) / 5) + (365*y) + (y/4) - 32083;
-            // std::cout << "else - sats " << JD << std::endl;
-		}
-		return JD;
-	}
-	
 	int Date::mod_julian_day() const {
 		return julian_day() - 2400000.5;
 	}
-	
-	Date::~Date() {}
-	
-	/// Convert the date stored in this object to Julian.
-	void Date::convert_to_julian() {
-		convert( true );
-	}
-	
-	void Date::convert_to_gregorian() {
-		convert( false );
-	}
-	
-	/// Convert the date stored in the current object from
-	/// Gregorian to Julian, or from Julian to Gregorian depending
-	/// on the flag given as argument.
-	/// @param convert_to_julian True iff convert from Gregorian to Julian
-	void Date::convert(bool to_julian) {
-		// Ref: https://en.wikipedia.org/wiki/Julian_day#Calculation
-		
-		//////////////////////////////////////////////////////
-		//	Convert the current date to Julian Day (JD)
-		//////////////////////////////////////////////////////
-		int JD = julian_day();
-		
-		//////////////////////////////////////////////////////
-		//	Convert JD to (year, month, day) in the calendar 
-		//	format specified by convert_to_julian
-		//////////////////////////////////////////////////////
-        int f;
-        int y = 4716;
-        int j = 1401;
-        int m = 2;
-        int n = 12;
-        int r = 4;
-        int p = 1461; 
-        int v = 3;
-        int u = 5;
-        int s = 153;
-        int w = 2; 
-        int B = 274277;
-        int C = -38;
-		if (to_julian) {
-			// For the Julian calendar, calculate:
-            f = JD + j; 
-		} else {
-			// For the Gregorian calendar, calculate:
-            f = JD + j + (((4*JD+B)/146097)*3)/4+C;
-		}
-		
-        int e = r*f+v;
-        int g = (e % p)/r;
-        int h = u*g+w;
-        mDay = (h % s)/u+1;
-        mMonth = ((h/s+m)%n)+1;
-        mYear = (e/p)-y+(n+m-mMonth)/n;
-	}
+
+    std::ostream& operator <<(std::ostream& os, const Date& date) {
+        os << date.year() << "-" << date.month() << "-" << date.day();
+        return os;
+    }
 
     bool operator==(const Date& a, const Date& b) {
-        // Checking if it is the same type of date
-        if ( a.gregorian == b.is_gregorian() ) {
-           if ((a.year() == b.year()) && (a.month() == b.month()) && (a.day() == b.day())) {
-               return true;
-           } 
-           else return false; 
-        }
-        // Check gregorian == julian
-        else if ( a.is_gregorian() && !b.is_gregorian() ) {
-            Gregorian tempX(b); 
-            if ((a.year() == tempX.year()) && (a.month() == tempX.month()) && (a.day() == tempX.day())) 
-                return true;
-            else return false;
-        }
-        // Check julian == gregorian
-        else if ( !a.is_gregorian() && b.is_gregorian() ) {
-            Julian tempX(b); 
-            if ((a.year() == tempX.year()) && (a.month() == tempX.month()) && (a.day() == tempX.day())) 
-                return true;
-            else return false;
-        }
-        else return false;
+        return a.mod_julian_day() == b.mod_julian_day();
     }
+
     
     bool operator!=(const Date &a, const Date& b) {
 		return !(a == b);
 	}
 	
-	Date& Date::add_day() {
-		++mDay;
-		if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
-			if (mDay > 31) {
-				mDay = 1;
-				++mMonth;
-				if (mMonth > 12) {
-					mMonth = 1;
-					++mYear;
-				}
-			}
-		}
-		if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
-			if (mDay > 30) {
-				mDay = 1;
-				++mMonth;
-				if (mMonth > 12) {
-					mMonth = 1;
-					++mYear;
-				}
-			}
-		}
-		
-		if (mMonth == 2) {
-			if (mYear % 4 == 0) {
-				// Leap year
-				if (mDay > 29) {
-					++mMonth;
-					mDay = 1;
-				}
-			} else {
-				// Not a leap year
-				if (mDay > 28) {
-					++mMonth;
-					mDay = 1;
-				}
-			}
-		}
-		
-		return *this;
-	}
-	
-	Date& Date::add_days(int days_to_add) {
-		if (days_to_add < 0) {
-			for (int i = 0; i > days_to_add; --i) {
-				remove_day();
-			}
-		}
-		else {
-			for (int i = 0; i < days_to_add; ++i) {
-				add_day();
-			}
-		}
-		return *this;
-	}
-	
-	Date& Date::remove_day() {
-		--mDay;
-		if (mDay < 1) {
-			mMonth--;
-			if (mMonth == 1 || mMonth == 3 || mMonth == 5 || mMonth == 7 || mMonth == 8 || mMonth == 10 || mMonth == 12) {
-				mDay = 31;
-			}
-			else if (mMonth == 4 || mMonth == 6 || mMonth == 9 || mMonth == 11) {
-				mDay = 30;
-			}
-			else if (mMonth == 2) {
-				mDay = is_leap_year() ? 29 : 28;
-			}
-			if (mMonth < 1) {
-				mMonth = 12;
-                mDay = 31;
-				--mYear;
-			}
-		}
-		
-		return *this;
-	}
-	
-	Date& Date::remove_days(int days_to_remove) {
-		if (days_to_remove < 0) {
-			for (int i = 0; i > days_to_remove; --i) {
-				add_day();
-			}
-		}
-		else {
-			for (int i = 0; i < days_to_remove ; ++i) {
-				remove_day();
-			}
-		}
-		return *this;
-	}
 	
 	int operator -(const Date& l, const Date& r) {
 		return l.julian_day() - r.julian_day();
 	}
-	
-	// Postfix increment e.g julian++
+
 	Date Date::operator++(int) {
 		Date d = *this;
 		add_day();
@@ -394,23 +330,6 @@ namespace lab2 {
 		return add_day();
 	}
 	
-	bool Date::operator<(const Date& d) const {
-		return julian_day() < d.julian_day();
-	}
-	
-	bool Date::operator>(const Date& d) const  {
-		return julian_day()>d.julian_day();
-	}
-	
-	bool Date::operator>=(const Date& d) const {
-		return julian_day()>=d.julian_day();
-	}
-	
-	bool Date::operator<=(const Date& d) const {
-		return julian_day()<=d.julian_day();
-	}
-	
-	// Postfix decrement e.g julian--
 	Date Date::operator--(int) {
 		Date d = *this;
 		return remove_day();
@@ -420,12 +339,34 @@ namespace lab2 {
 	Date& Date::operator--() {
 		return remove_day();
 	}
-	
+
 	Date& Date::operator+=(int days_to_add) {
 		return add_days(days_to_add);
 	}
-	
+
 	Date& Date::operator-=(int days_to_remove) {
 		return remove_days(days_to_remove);
 	}
+
+	bool Date::operator>=(const Date& d) const {
+		return julian_day()>=d.julian_day();
+	}
+    
+	bool Date::operator>(const Date& d) const  {
+		return julian_day()>d.julian_day();
+	}
+
+	bool Date::operator<(const Date& d) const {
+		return julian_day() < d.julian_day();
+	}
+	
+	bool Date::operator<=(const Date& d) const {
+		return julian_day()<=d.julian_day();
+	}
+
+	
+	
+	
+	
+	
 }

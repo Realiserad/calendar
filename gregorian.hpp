@@ -11,8 +11,8 @@ namespace lab2 {
         Gregorian(const Date&);
 
         // Virtual operators/functions
-        virtual Gregorian& operator=(const Date&);
-        virtual Type type() const; 
+        virtual Gregorian& operator=(const Date&) override;
+        virtual Type type() const override; 
     };
 }
 #endif

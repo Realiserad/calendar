@@ -12,10 +12,10 @@ void test_increment() {
     assert(g1.day() == 1 && g1.month() == 1 && g1.year() == 2000);
     g1++;
     assert(g1.day() == 2 && g1.month() == 1 && g1.year() == 2000);
-    lab2::Gregorian g2(2000, 02, 28);
+    lab2::Gregorian g2(2000, 2, 28);
     g2++;
     assert(g2.day() == 29 && g2.month() == 2 && g2.year() == 2000);
-    lab2::Gregorian g3(1900, 02, 28);
+    lab2::Gregorian g3(1900, 2, 28);
     g3++;
     assert(g3.day() == 1 && g3.month() == 3 && g3.year() == 1900);
 }
@@ -160,48 +160,50 @@ void test_kattis2() {
     // // 34: dump-info $B
 
 
-    lab2::Julian c(2097, 2, 15); // 35: ymd-construct julian $C 2097 2 15
-    c.add_year(16);// 36: add_year  $C  16
-    c += 16;// 37: d+= $C 16
-    c.add_month(16);// 38: add_month $C  16
-    c -= 16;// 39: d-= $C 16
-    c += -16;// 40: d+= $C -16
-    c.add_year(-16);// 41: add_year  $C -16
-    c -= -16;// 42: d-= $C -16
-    ++c;// 43: ++d $C
-    c.add_month(-16);// 44: add_month $C -16
-    --c;// 45: --d $C
+    lab2::Date * c = new lab2::Julian(2097,2,15);
+    // lab2::Julian c(2097, 2, 15); // 35: ymd-construct julian $C 2097 2 15
+    c->add_year(16);// 36: add_year  $C  16
+    *c += 16;// 37: d+= $C 16
+    c->add_month(16);// 38: add_month $C  16
+    *c -= 16;// 39: d-= $C 16
+    *c += -16;// 40: d+= $C -16
+    c->add_year(-16);// 41: add_year  $C -16
+    *c -= -16;// 42: d-= $C -16
+    ++(*c);// 43: ++d $C
+    c->add_month(-16);// 44: add_month $C -16
+    --(*c);// 45: --d $C
     // 46: dump-info $C
-    c.add_year(18);// 47: add_year  $C  18
-    c += 18;// 48: d+= $C 18
-    c.add_month(18);// 49: add_month $C  18
-    c -= 18;// 50: d-= $C 18
-    c += -18;// 51: d+= $C -18
-    c.add_year(-18);// 52: add_year  $C -18
-    c -= -18;// 53: d-= $C -18
-    ++c;// 54: ++d $C
-    c.add_month(-18);// 55: add_month $C -18
-    --c;// 56: --d $C
+    c->add_year(18);// 47: add_year  $C  18
+    *c += 18;// 48: d+= $C 18
+    c->add_month(18);// 49: add_month $C  18
+    *c -= 18;// 50: d-= $C 18
+    *c += -18;// 51: d+= $C -18
+    c->add_year(-18);// 52: add_year  $C -18
+    *c -= -18;// 53: d-= $C -18
+    ++(*c);// 54: ++d $C
+    c->add_month(-18);// 55: add_month $C -18
+    --(*c);// 56: --d $C
     // 57: dump-info $C
-    c.add_year(8);// 58: add_year  $C  8
-    c += 8;// 59: d+= $C 8
-    c.add_month(8);// 60: add_month $C  8
-    c -= 8;// 61: d-= $C 8
-    c += -8;// 62: d+= $C -8
-    c.add_year(-8);// 63: add_year  $C -8
-    c -= -8;// 64: d-= $C -8
-    ++c;// 65: ++d $C
-    c.add_month(-8);// 66: add_month $C -8
-    --c;// 67: --d $C
+    c->add_year(8);// 58: add_year  $C  8
+    *c += 8;// 59: d+= $C 8
+    c->add_month(8);// 60: add_month $C  8
+    *c -= 8;// 61: d-= $C 8
+    *c += -8;// 62: d+= $C -8
+    c->add_year(-8);// 63: add_year  $C -8
+    *c -= -8;// 64: d-= $C -8
+    ++(*c);// 65: ++d $C
+    c->add_month(-8);// 66: add_month $C -8
+    --(*c);// 67: --d $C
     // 68: dump-info $C
-    std::cout << "Before copy-assign C: " << c << ", mod: " << c.mod_julian_day() << std::endl; 
+    std::cout << "Before copy-assign C: " << *c << ", mod: " << c->mod_julian_day() << std::endl; 
     // 69: copy-assign $C $B
-    lab2::Gregorian b(2097, 3, 5);
-    std::cout << "Before copy-assign B: " << b << ", mod: " << b.mod_julian_day() << std::endl; 
+    lab2::Date * b = new lab2::Gregorian(2097,3,5);
+    // lab2::Gregorian b(2097, 3, 5);
+    std::cout << "Before copy-assign B: " << *b << ", mod: " << b->mod_julian_day() << std::endl; 
     std::cout << "Copy assign: C <- B" << std::endl;
-    // c = b;
-    std::cout << "After copy-assign C: " << c << ", mod: " << c.mod_julian_day() << std::endl; 
-    std::cout << "After copy-assign B: " << b << ", mod: " << b.mod_julian_day() << std::endl; 
+    *c = *b;
+    std::cout << "After copy-assign C: " << *c << ", mod: " << c->mod_julian_day() << std::endl; 
+    std::cout << "After copy-assign B: " << *b << ", mod: " << b->mod_julian_day() << std::endl; 
     
     std::cout << "Kattis: $B => '2097-02-20, mod_julian_day() = 87037' should have been '2097-03-05, mod_julian_day() = 87037" << std::endl;
 }
@@ -224,24 +226,27 @@ void test_copy_assign() {
 
 
 int main() {
-	// test_cout();
-    // test_increment();
-    // test_feminism();
-    // test_convert();
-    // test_pointers();
-    // test_add_month();
-    // test_add_year(); 
-    // test_relational();
-    // test_kattis1();
-    // test_kattis2();
+	test_cout();
+    test_increment();
+    test_feminism();
+    test_convert();
+    test_pointers();
+    test_add_month();
+    test_add_year(); 
+    test_relational();
+    test_kattis1();
+    test_kattis2();
     
+    // lab2::Gregorian c(2134,2,29);
+    // std::cout << c << std::endl;
     // test_copy_assign();
-    lab2::Julian j(1993,2,28);
-    std::cout << j << std::endl;
-    // std::cout << "g: " << g << ", mod: " << g.mod_julian_day() << std::endl;
-    lab2::Gregorian g(j);
-    std::cout << g << std::endl;
-    j = g;
+    // lab2::Gregorian j(1993,2,28);
+    // std::cout << j << std::endl;
+    // // std::cout << "g: " << g << ", mod: " << g.mod_julian_day() << std::endl;
+    // lab2::Julian g(j);
+    // std::cout << j.mod_julian_day() << ", " << g.mod_julian_day() << std::endl;
+    // std::cout << g << std::endl;
+    // j = g;
     // // std::cout << "after copy con j: " << j << ", mod: " << j.mod_julian_day() << std::endl;
     //
     // lab2::Gregorian g1;

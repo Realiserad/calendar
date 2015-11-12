@@ -11,8 +11,8 @@ namespace lab2 {
 		Julian(const Date&);
 
         // Virtual operators/functions
-        virtual Julian& operator=(const Date&);
-        virtual Type type() const;
+        virtual Julian& operator=(const Date&) override;
+        virtual Type type() const override;
 	};
 }
 #endif

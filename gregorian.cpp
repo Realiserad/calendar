@@ -2,17 +2,30 @@
 #include "gregorian.hpp"
 #include "julian.hpp"
 #include "date.hpp"
+#include <stdexcept>
 
-#define KATTIS (0)
+#define KATTIS (1)
 
 #if KATTIS
 #include "kattistime.h"
 #endif 
 
 namespace lab2 {
-	Gregorian::Gregorian(int y, int m, int d) : Date(y, m, d, true) {}
-	Gregorian::Gregorian() {
-		gregorian = true;
+	Gregorian::Gregorian(int y, int m, int d) : Date(y, m, d) {
+		if (mYear < 1858 || mYear> 2558) {
+			throw std::out_of_range("Bad year");
+		}
+		if (mMonth < 1 || mMonth > 12) {
+			throw std::invalid_argument("Bad month");
+		}
+		if (mDay < 1) {
+			throw std::invalid_argument("Bad day");
+		}
+        int test = days_this_month();
+        if (mDay > test) throw std::invalid_argument("Bad day");
+    }
+
+    Gregorian::Gregorian() {
 
 #if KATTIS
         // kattis time include "kattistime.h"
@@ -33,16 +46,24 @@ namespace lab2 {
 	
     Gregorian::Gregorian(const Date& d) {
         if (d.type() == J) {
-            std::cout << "Copy constructur" << std::endl;
-            std::cout << "Convert from Julian -> Gregorian"  << std::endl;
+            // std::cout << "Copy constructur" << std::endl;
+            // std::cout << "Convert from Julian -> Gregorian"  << std::endl; 
+            mYear = d.year();
+            mMonth = d.month();
+            mDay = d.day();
+            convert(d.type());
         }
     }
     
     // -------------------- Virtual operators/functions ------------------
     Gregorian& Gregorian::operator=(const Date& d) {
         if (d.type() == J) {
-            std::cout << "Copy assignment operator ==" << std::endl;
-            std::cout << "Convert from Julian -> Gregorian"  << std::endl;
+            // std::cout << "Copy assignment operator ==" << std::endl;
+            // std::cout << "Convert from Julian -> Gregorian"  << std::endl;
+            mYear = d.year();
+            mMonth = d.month();
+            mDay = d.day();
+            convert(d.type());
         }
         return *this;
     }
