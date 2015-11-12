@@ -1,0 +1,43 @@
+Kattis-id: 956286
+
+• Why can prefix increment/decrement be declared in the abstract base-class, but not postfix?
+
+Därför att postfix-operatorn skall returnera en kopia av *this, som är en
+abstrakt klass som inte får instansieras.
+
+• You shall come up with pros and cons when comparing the designs alternatives.
+
+    Date         Date
+     |            |
+  Gregorian     Julian
+     |            |
+   Julian      Gregorian
+
+Fördelen med denna design är att Date kan vara relativt liten och pure virtual.
+Det mesta av logiken kommer att hamna i mellanklassen, men det blir inte så mycket
+kod i bottenklassen eftersom den kan återanvända mycket av logiken från mittenklassen.
+
+        Date
+       /    \
+      /      \
+     /        \
+Gregorian    Julian
+
+Vi valde denna design. Det visade sig att nästan all logik hamnade i Date. Problemet
+med denna design är att det blir mycket kodduplicering i Gregorian och Julian
+om man försöker få Date liten och pure virtual.
+
+      Date
+        |
+        |
+        |
+      middle
+      /    \
+     /      \
+    /        \
+Gregorian    Julian
+
+
+Den här designen är nog bäst för en modulär arvsstruktur, då kan mittenklassen implementera funktionalitet för en "västerlänsk kalender" och Date kan hållas
+mer generell. Nackdelen är att det blir ganska många olika klasser och mycket
+"boilerplate-kod" om man bara har två implementationer.
