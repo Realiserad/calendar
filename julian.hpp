@@ -9,9 +9,10 @@ namespace lab2 {
 		Julian();
 		Julian(int, int, int);
 		Julian(const Date&);
-		Julian& operator=(Date&);
-		Julian& operator=(Julian&);
-		//Julian& operator=(Gregorian&);
+
+        // Virtual operators/functions
+        virtual Julian& operator=(const Date&);
+        virtual Type type() const;
 	};
 }
 #endif

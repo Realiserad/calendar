@@ -9,8 +9,10 @@ namespace lab2 {
         Gregorian();
         Gregorian(int, int, int);
         Gregorian(const Date&);
-        Gregorian& operator=(Date&);
-        Gregorian& operator=(Julian&);
+
+        // Virtual operators/functions
+        virtual Gregorian& operator=(const Date&);
+        virtual Type type() const; 
     };
 }
 #endif

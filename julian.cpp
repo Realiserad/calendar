@@ -37,30 +37,20 @@ namespace lab2 {
 	}
     
     Julian::Julian(const Date &d) {
-		mDay = d.day();
-		mYear = d.year();
-		mMonth = d.month();
-		if (d.is_gregorian()) {
-            gregorian = true; 
-			convert_to_julian();
-            gregorian = false; 
-		}
+        if (d.type() == G) {
+            std::cout << "Copy constructur" << std::endl;
+            std::cout << "Convert from Gregorian -> Julian"  << std::endl;
+        }
 	}
-	
-	Julian& Julian::operator=(Date& d) {
-		mDay = d.day();
-		mYear = d.year();
-		mMonth = d.month();
-		if (d.is_gregorian()) {
-			convert_to_julian();
-		}
-		return *this;
-	}
-	
-	Julian& Julian::operator=(Julian& j) {
-		mDay = j.day();
-		mYear = j.year();
-		mMonth = j.month();
-		return *this;
-	}
+
+    // -------------------- Virtual operators/functions ------------------
+    Julian& Julian::operator=(const Date& d) {
+        if (d.type() == G) {
+            std::cout << "Copy assignment operator ==" << std::endl;
+            std::cout << "Convert from Gregorian -> Julian"  << std::endl;
+        }
+        return *this;
+    }
+     
+    Type Julian::type() const { return Type(J); }
 }

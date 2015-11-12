@@ -32,28 +32,20 @@ namespace lab2 {
 	}
 	
     Gregorian::Gregorian(const Date& d) {
-		mYear = d.year();
-		mMonth = d.month();
-		mDay = d.day();
-		if (!d.is_gregorian()) {
-            gregorian = false;
-			convert_to_gregorian();
-            gregorian = true;
-		}
+        if (d.type() == J) {
+            std::cout << "Copy constructur" << std::endl;
+            std::cout << "Convert from Julian -> Gregorian"  << std::endl;
+        }
     }
     
-    Gregorian& Gregorian::operator=(Julian& j) {
-		std::cout << "problem solved" << std::endl;
-	}
-    
-    Gregorian& Gregorian::operator=(Date& d) {
-		std::cout << "gregorian copy assign" << std::endl;
-		mMonth = d.month();
-		mYear = d.year();
-		mDay = d.day();
-		if (!d.is_gregorian()) {
-			convert_to_gregorian();
-		}
-		return *this;
-	}
+    // -------------------- Virtual operators/functions ------------------
+    Gregorian& Gregorian::operator=(const Date& d) {
+        if (d.type() == J) {
+            std::cout << "Copy assignment operator ==" << std::endl;
+            std::cout << "Convert from Julian -> Gregorian"  << std::endl;
+        }
+        return *this;
+    }
+
+    Type Gregorian::type() const { return Type(G); }
 }

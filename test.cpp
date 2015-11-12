@@ -4,7 +4,6 @@
 #include "gregorian.cpp"
 #include "julian.cpp"
 #include <ctime>
-#include "kattistime.h"
 
 /// test operator++(int)
 void test_increment() {
@@ -200,7 +199,7 @@ void test_kattis2() {
     lab2::Gregorian b(2097, 3, 5);
     std::cout << "Before copy-assign B: " << b << ", mod: " << b.mod_julian_day() << std::endl; 
     std::cout << "Copy assign: C <- B" << std::endl;
-    c = b;
+    // c = b;
     std::cout << "After copy-assign C: " << c << ", mod: " << c.mod_julian_day() << std::endl; 
     std::cout << "After copy-assign B: " << b << ", mod: " << b.mod_julian_day() << std::endl; 
     
@@ -234,15 +233,27 @@ int main() {
     // test_add_year(); 
     // test_relational();
     // test_kattis1();
-    //test_kattis2();
+    // test_kattis2();
     
-    test_copy_assign();
-    
-    // lab2::Gregorian y(2006, 8, 1);
-    // std::cout << y << ", mod: " << y.mod_julian_day() << std::endl;
-    // lab2::Julian x(1993,2,28);
-    // std::cout << x << ", mod: " << x.mod_julian_day() << std::endl;
-    // x = y;
-    // std::cout << x << ", mod: " << x.mod_julian_day() << std::endl;
-    // std::cout << y << ", mod: " << x.mod_julian_day() << std::endl;
+    // test_copy_assign();
+    lab2::Julian j(1993,2,28);
+    std::cout << j << std::endl;
+    // std::cout << "g: " << g << ", mod: " << g.mod_julian_day() << std::endl;
+    lab2::Gregorian g(j);
+    std::cout << g << std::endl;
+    j = g;
+    // // std::cout << "after copy con j: " << j << ", mod: " << j.mod_julian_day() << std::endl;
+    //
+    // lab2::Gregorian g1;
+    // // std::cout << "g1: " << g1 << ", mod: " << g1.mod_julian_day() << std::endl;
+    // lab2::Julian j1;
+    // // std::cout << "j1: " << j1 << ", mod: " << j1.mod_julian_day() << std::endl;
+    // j1 = g1;
+    //
+	// lab2::Date *jp = new lab2::Julian(2013,1,2);
+    // // std::cout << "*jp: " << *jp << ", mod: " << jp -> mod_julian_day() << std::endl;
+	// lab2::Date *gp = new lab2::Gregorian();
+    // // std::cout << "*gp: " << *gp << ", mod: " << gp -> mod_julian_day() << std::endl;
+	// *gp = *jp;
+    // // std::cout << "*gp: " << *gp << ", mod: " << gp -> mod_julian_day() << std::endl;
 }

@@ -2,6 +2,8 @@
 #define __DATE
 #include <string>
 #include <iostream>
+#include "type.hpp"
+
 namespace lab2 {
 	/**
 	 * Abstract class for a Date which specifies required
@@ -21,6 +23,18 @@ namespace lab2 {
 		void convert_to_julian( void );
 		void convert_to_gregorian( void );
 		public:
+         
+        // Copy constructor - behövs inte egenligen
+        Date (const Date& d) {
+            mYear = d.year();
+            mMonth = d.month();
+            mDay = d.day();
+        }
+        
+        // -------------------- Virtual operators/functions ------------------
+        virtual Date& operator=(const Date&) { return *this; }
+        virtual Type type() const { return Type(D); }
+        
 		/* Construct a date from the triple (year, month, day)
 		 * specified in the date format used by the class. Throws 
 		 * std::invalid_argument if an invalid date is given. In
@@ -56,7 +70,6 @@ namespace lab2 {
 		int julian_day() const;
 		bool is_leap_year() const;
 		
-        
 		bool is_gregorian() const;
 
         // ------------------------------------ operators --------------------
