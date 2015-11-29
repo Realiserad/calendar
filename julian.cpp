@@ -4,7 +4,7 @@
 #include "gregorian.hpp"
 #include <stdexcept>
 
-#define KATTIS (1) 
+#define KATTIS (0) 
 
 #if KATTIS
 #include "kattistime.h"

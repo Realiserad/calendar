@@ -1,19 +1,17 @@
 CC = g++
 FLAGS = -std=c++11 -Wall -pedantic -g
+calendar :
+	$(CC) calendar.cpp $(FLAGS) -c
 date :
-	$(CC) ./Date.cpp $(FLAGS) -c
+	$(CC) date.cpp $(FLAGS) -c
 greg :
-	$(CC) ./Gregorian.cpp $(FLAGS) -c
+	$(CC) gregorian.cpp $(FLAGS) -c
 julia :
-	$(CC) ./Julian.cpp $(FLAGS) -c
+	$(CC) julian.cpp $(FLAGS) -c
 clean :
 	rm -rf *.o *.gch *.out .*.*.swp
 	@echo "Crap destroyed successfully!"
-all :
-	$(CC) $(FLAGS) -c julian.cpp
-	$(CC) $(FLAGS) -c date.cpp
-	$(CC) $(FLAGS) -c gregorian.cpp
-	$(CC) $(FLAGS) test.cpp
+all : date greg julia calendar
 test :
 	$(CC) $(FLAGS) test.cpp -o test.out
 	./test.out
