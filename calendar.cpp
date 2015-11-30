@@ -127,12 +127,12 @@ namespace lab2 {
 			if (*j >= calendar.now) {
 				std::string event_name = *i;
 				DateType event_date = *j;
-				std::string event_year = event_date.year() < 10 ? "0" + event_date.year() : std::to_string( event_date.year() );
-				std::string event_month = event_date.year() < 10 ? "0" + event_date.month() : std::to_string( event_date.month() );
-				std::string event_day = event_date.day() < 10 ? "0" + event_date.day() : std::to_string( event_date.day() );
-				std::string year_now = calendar.now.year() < 10 ? "0" + calendar.now.year() : std::to_string( calendar.now.year() );
-				std::string month_now = calendar.now.month() < 10 ? "0" + calendar.now.month() : std::to_string( calendar.now.month() );
-				std::string day_now = calendar.now.day() < 10 ? "0" + calendar.now.day() : std::to_string( calendar.now.day() );
+				std::string event_year = event_date.year() < 10 ? "0" + std::to_string(event_date.year()) : std::to_string( event_date.year() );
+				std::string event_month = event_date.year() < 10 ? "0" + std::to_string(event_date.month()) : std::to_string( event_date.month() );
+				std::string event_day = event_date.day() < 10 ? "0" + std::to_string(event_date.day()) : std::to_string( event_date.day() );
+				std::string year_now = calendar.now.year() < 10 ? "0" + std::to_string(calendar.now.year()) : std::to_string( calendar.now.year() );
+				std::string month_now = calendar.now.month() < 10 ? "0" + std::to_string(calendar.now.month()) : std::to_string( calendar.now.month() );
+				std::string day_now = calendar.now.day() < 10 ? "0" + std::to_string(calendar.now.day()) : std::to_string( calendar.now.day() );
 				
 				os << "BEGIN:VEVENT" << std::endl;
 				os << "DTSTAMP:" << year_now << month_now << day_now << "T120000Z" << std::endl;

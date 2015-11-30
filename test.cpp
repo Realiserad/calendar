@@ -24,6 +24,16 @@ void test_calendar() {
 	cal.add_event("Min första cykel", 20, 12, 2000);
 	cal.remove_event("Basketträning", 4);
 	std::cout << cal;
+	
+	// Basketträning 2000-12-04 ska ej skrivas ut då den har tagits bort
+	// Basketträning 2000-12-11 ska skrivas ut
+	// Nyårsfrukost ska skrivas ut
+	// Första advent har redan varit och skall ej skrivas ut
+	// Vårdagjämning har redan varit och skall ej skrivas ut
+	// Julafton ska skrivas ut
+	// Kalle Anka ska läggas in på samma datum som julafton
+	// Julafton är dubblett och ska inte läggas in
+	// Min första cyckel ska skrivas ut
 }
 
 /// test operator++(int)
