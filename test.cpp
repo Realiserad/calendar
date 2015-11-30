@@ -3,7 +3,24 @@
 #include "date.cpp"
 #include "gregorian.cpp"
 #include "julian.cpp"
+#include "calendar.hpp"
 #include <ctime>
+
+void test_calendar() {
+	lab2::Calendar<lab2::Gregorian> cal;
+	cal.set_date(2000, 12, 2);
+	cal.add_event("Basketträning", 4, 12, 2000);
+	cal.add_event("Basketträning", 11, 12, 2000);
+	cal.add_event("Nyårsfrukost", 1, 1, 2001);
+	cal.add_event("Första advent", 1); // år = 2000, månad = 12
+	cal.add_event("Vårdagjämning", 20, 3); // år = 2000
+	cal.add_event("Julafton", 24, 12);
+	cal.add_event("Kalle Anka hälsar god jul", 24); // också på julafton
+	cal.add_event("Julafton", 24); // En likadan händelse samma datum ska ignoreras och inte sättas in i kalendern
+	cal.add_event("Min första cykel", 20, 12, 2000);
+	cal.remove_event("Basketträning", 4);
+	std::cout << cal;
+}
 
 /// test operator++(int)
 void test_increment() {
@@ -226,7 +243,7 @@ void test_copy_assign() {
 
 
 int main() {
-	test_cout();
+	/*test_cout();
     test_increment();
     test_feminism();
     test_convert();
@@ -235,7 +252,9 @@ int main() {
     test_add_year(); 
     test_relational();
     test_kattis1();
-    test_kattis2();
+    test_kattis2();*/
+    
+    test_calendar();
     
     // lab2::Gregorian c(2134,2,29);
     // std::cout << c << std::endl;
