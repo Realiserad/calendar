@@ -125,13 +125,20 @@ namespace lab2 {
 		auto j = calendar.event_dates.begin();
 		while (i != calendar.event_names.end()) {
 			if (*j >= calendar.now) {
-				std::string &event_name = *i;
-				DateType &event_date = *j; 
+				std::string event_name = *i;
+				DateType event_date = *j;
+				std::string event_year = event_date.year() < 10 ? "0" + event_date.year() : std::to_string( event_date.year() );
+				std::string event_month = event_date.year() < 10 ? "0" + event_date.month() : std::to_string( event_date.month() );
+				std::string event_day = event_date.day() < 10 ? "0" + event_date.day() : std::to_string( event_date.day() );
+				std::string year_now = calendar.now.year() < 10 ? "0" + calendar.now.year() : std::to_string( calendar.now.year() );
+				std::string month_now = calendar.now.month() < 10 ? "0" + calendar.now.month() : std::to_string( calendar.now.month() );
+				std::string day_now = calendar.now.day() < 10 ? "0" + calendar.now.day() : std::to_string( calendar.now.day() );
+				
 				os << "BEGIN:VEVENT" << std::endl;
-				os << "DTSTAMP:" << now.year() << now.month() << now.day() << "T120000Z" << std::endl;
+				os << "DTSTAMP:" << year_now << month_now << day_now << "T120000Z" << std::endl;
 				os << "ORGANIZER;CN=Bastian Fredriksson:MAILTO:bastianf@kth.se" << std::endl;
-				os << "DTSTART:" << event_date.year() << event_date.month() << event_date.day() << "T000000Z" << std::endl;
-				os << "DTEND:" << event_date.year() << event_date.month() << event_date.day() << "T235959Z" << std::endl;
+				os << "DTSTART:" << event_year << event_month << event_day << "T080000Z" << std::endl;
+				os << "DTEND:" << event_year << event_month << event_day << "T235959Z" << std::endl;
 				os << "SUMMARY:" << event_name << std::endl;
 				os << "END:VEVENT" << std::endl;
 			}
