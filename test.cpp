@@ -6,6 +6,9 @@
 #include "calendar.hpp"
 #include <ctime>
 
+template class lab2::Calendar<lab2::Gregorian>;
+template class lab2::Calendar<lab2::Julian>;
+
 void test_calendar() {
 	lab2::Calendar<lab2::Gregorian> cal;
 	cal.set_date(2000, 12, 2);

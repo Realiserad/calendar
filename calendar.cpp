@@ -115,24 +115,6 @@ namespace lab2 {
 		}
 		return false;
 	}
-	
-	template <typename DateType>
-	std::ostream& operator<<(std::ostream &os, const Calendar<DateType> &calendar) {
-		// https://en.wikipedia.org/wiki/ICalendar
-		os << "BEGIN:VCALENDAR" << std::endl;
-		os << "VERSION:2.0" << std::endl;
-		auto i = calendar.event_names.begin();
-		auto j = calendar.event_dates.begin();
-		while (i != calendar.event_names.end()) {
-			if (*j >= calendar.now) {
-				print_calendar_entry(*i, *j, os);
-			}
-			++i;
-			++j;
-		}
-		os << "END:VCALENDAR" << std::endl;
-        return os;
-    }
     
     template <typename DateType>
     void Calendar<DateType>::print_calendar_entry(std::string &event_name, DateType &event_date, std::ostream &os) {
@@ -145,6 +127,21 @@ namespace lab2 {
 		os << "END:VEVENT" << std::endl;
 	}
 	
-	template class Calendar<Gregorian>;
-	template class Calendar<Julian>;
+	template <typename DateType>
+	std::ostream& operator<<(std::ostream &os, const Calendar<DateType> &calendar) {
+		// https://en.wikipedia.org/wiki/ICalendar
+		os << "BEGIN:VCALENDAR" << std::endl;
+		os << "VERSION:2.0" << std::endl;
+		auto i = calendar.event_names.begin();
+		auto j = calendar.event_dates.begin();
+		while (i != calendar.event_names.end()) {
+			if (*j >= calendar.now) {
+				calendar.print_calendar_entry(*i, *j, os);
+			}
+			++i;
+			++j;
+		}
+		os << "END:VCALENDAR" << std::endl;
+        return os;
+    }
 }

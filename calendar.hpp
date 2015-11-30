@@ -27,6 +27,7 @@ namespace lab2 {
 		bool remove_event(std::string, int);
 		bool remove_event(std::string, int, int);
 		bool remove_event(std::string, int, int, int);
+		void test_calendar();
 		
 		template <typename T>
 		friend std::ostream& operator<<(std::ostream&, const Calendar<T>&);

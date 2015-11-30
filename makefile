@@ -11,7 +11,7 @@ julia :
 clean :
 	rm -rf *.o *.gch *.out .*.*.swp
 	@echo "Crap destroyed successfully!"
-all : date greg julia calendar
+all : date greg julia calendar test
 test :
 	$(CC) $(FLAGS) test.cpp -o test.out
 	./test.out
