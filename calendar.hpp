@@ -13,7 +13,6 @@ namespace lab2 {
 		std::vector<std::string> event_names;
 		bool calendar_contains_event(std::string&, DateType&) const;
 		bool remove_calendar_event(std::string&, DateType&);
-		void print_calendar_entry(std::string&, DateType&, std::ostream&);
 		
 		public:
 		explicit Calendar();

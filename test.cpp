@@ -4,6 +4,7 @@
 #include "gregorian.cpp"
 #include "julian.cpp"
 #include "calendar.hpp"
+#include "calendar.cpp"
 #include <ctime>
 
 template class lab2::Calendar<lab2::Gregorian>;

@@ -115,17 +115,6 @@ namespace lab2 {
 		}
 		return false;
 	}
-    
-    template <typename DateType>
-    void Calendar<DateType>::print_calendar_entry(std::string &event_name, DateType &event_date, std::ostream &os) {
-		os << "BEGIN:VEVENT" << std::endl;
-		os << "DTSTAMP:" << now.year() << now.month() << now.day() << "T120000Z" << std::endl;
-		os << "ORGANIZER;CN=Bastian Fredriksson:MAILTO:bastianf@kth.se" << std::endl;
-		os << "DTSTART:" << event_date.year() << event_date.month() << event_date.day() << "T000000Z" << std::endl;
-		os << "DTEND:" << event_date.year() << event_date.month() << event_date.day() << "T235959Z" << std::endl;
-		os << "SUMMARY:" << event_name << std::endl;
-		os << "END:VEVENT" << std::endl;
-	}
 	
 	template <typename DateType>
 	std::ostream& operator<<(std::ostream &os, const Calendar<DateType> &calendar) {
@@ -136,7 +125,15 @@ namespace lab2 {
 		auto j = calendar.event_dates.begin();
 		while (i != calendar.event_names.end()) {
 			if (*j >= calendar.now) {
-				calendar.print_calendar_entry(*i, *j, os);
+				std::string &event_name = *i;
+				DateType &event_date = *j; 
+				os << "BEGIN:VEVENT" << std::endl;
+				os << "DTSTAMP:" << now.year() << now.month() << now.day() << "T120000Z" << std::endl;
+				os << "ORGANIZER;CN=Bastian Fredriksson:MAILTO:bastianf@kth.se" << std::endl;
+				os << "DTSTART:" << event_date.year() << event_date.month() << event_date.day() << "T000000Z" << std::endl;
+				os << "DTEND:" << event_date.year() << event_date.month() << event_date.day() << "T235959Z" << std::endl;
+				os << "SUMMARY:" << event_name << std::endl;
+				os << "END:VEVENT" << std::endl;
 			}
 			++i;
 			++j;
