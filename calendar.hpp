@@ -14,7 +14,7 @@ namespace lab2 {
 		bool calendar_contains_event(std::string&, DateType&) const;
 		bool remove_calendar_event(std::string&, DateType&);
 		template <typename T>
-		void copy_calendar(Calendar<T>&);
+		void copy_calendar(const Calendar<T>&);
 		
 		public:
 		explicit Calendar();
@@ -37,6 +37,9 @@ namespace lab2 {
 		
 		template <typename T>
 		friend std::ostream& operator<<(std::ostream&, const Calendar<T>&);
+
+        template <typename T>
+        void operator=(const Calendar<T>&);
 	};
 }
 

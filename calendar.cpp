@@ -18,16 +18,17 @@ namespace lab2 {
 	
 	template <typename DateType>
 	template<typename T>
-	Calendar<DateType>::Calendar(const Calendar<T> &calendar) {
-		now = calendar.get_date_now();
-		event_names = calendar.get_event_names();
-		event_dates = calendar.get_event_dates();
+	Calendar<DateType>::Calendar(const Calendar<T> &src) {
+        copy_calendar(src);
 	}
 	
 	template <typename DateType>
 	template <typename T>
-	void copy_calendar(Calendar<T> &calendar) {
-		
+	void Calendar<DateType>::copy_calendar(const Calendar<T> &src) {
+        for (auto i = src.get_event_dates().begin(); i < src.get_event_dates().size(); ++i) {
+            event_dates.push_back(DateType(*i));
+        }
+
 	}
 	
 	template <typename DateType>
@@ -45,9 +46,11 @@ namespace lab2 {
 		return now;
 	}
 	
-	/*template <typename DateType, typename T>
-	Calendar<DateType>::operator=(const Calendar<T> &v) {
-	}*/
+    template <typename DateType>
+    template <typename T>
+	void Calendar<DateType>::operator=(const Calendar<T> &src) {
+        copy_calendar(src);
+	}
 	
 	template <typename DateType>
 	Calendar<DateType>::Calendar(DateType date) : now(date) {}
