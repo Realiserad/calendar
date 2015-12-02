@@ -17,13 +17,46 @@ namespace lab2 {
 	}
 	
 	template <typename DateType>
+	template<typename T>
+	Calendar<DateType>::Calendar(const Calendar<T> &calendar) {
+		now = calendar.get_date_now();
+		event_names = calendar.get_event_names();
+		event_dates = calendar.get_event_dates();
+	}
+	
+	template <typename DateType>
+	template <typename T>
+	void copy_calendar(Calendar<T> &calendar) {
+		
+	}
+	
+	template <typename DateType>
+	std::vector<DateType> Calendar<DateType>::get_event_dates() const {
+		return event_dates;
+	}
+	
+	template <typename DateType>
+	std::vector<std::string> Calendar<DateType>::get_event_names() const {
+		return event_names;
+	}
+	
+	template <typename DateType>
+	DateType Calendar<DateType>::get_date_now() const {
+		return now;
+	}
+	
+	/*template <typename DateType, typename T>
+	Calendar<DateType>::operator=(const Calendar<T> &v) {
+	}*/
+	
+	template <typename DateType>
 	Calendar<DateType>::Calendar(DateType date) : now(date) {}
 	
 	template <typename DateType>
 	bool Calendar<DateType>::set_date(int year, int month, int day) {
 		try { 
 			now = DateType(year, month, day);
-			return true; 
+			return true;
 		}
 		catch (std::out_of_range &e) {
 			return false;

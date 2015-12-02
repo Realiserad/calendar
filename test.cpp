@@ -269,6 +269,8 @@ int main() {
     test_kattis2();*/
     
     test_calendar();
+    lab2::Calendar<lab2::Gregorian> gc;
+    lab2::Calendar<lab2::Julian> jc (gc);
     
     // lab2::Gregorian c(2134,2,29);
     // std::cout << c << std::endl;
